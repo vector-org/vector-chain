@@ -285,10 +285,10 @@
         "wasm": {
             "params": {
                 "code_upload_access": {
-                    "permission": "Everybody",
+                    "permission": "Nobody",
                     "addresses": []
                 },
-                "instantiate_default_permission": "Everybody"
+                "instantiate_default_permission": "Nobody"
             },
             "codes": [],
             "contracts": [],
