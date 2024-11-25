@@ -135,11 +135,6 @@ import (
 	"github.com/CosmWasm/wasmd/x/wasm"
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
-	wasmvm "github.com/CosmWasm/wasmvm"
-
-	wasmlc "github.com/cosmos/ibc-go/modules/light-clients/08-wasm"
-	wasmlckeeper "github.com/cosmos/ibc-go/modules/light-clients/08-wasm/keeper"
-	wasmlctypes "github.com/cosmos/ibc-go/modules/light-clients/08-wasm/types"
 
 	tokenfactory "github.com/strangelove-ventures/tokenfactory/x/tokenfactory"
 	tokenfactorybindings "github.com/strangelove-ventures/tokenfactory/x/tokenfactory/bindings"
@@ -262,7 +257,6 @@ type ChainApp struct {
 	WasmKeeper          wasmkeeper.Keeper
 	TokenFactoryKeeper  tokenfactorykeeper.Keeper
 	PacketForwardKeeper *packetforwardkeeper.Keeper
-	WasmClientKeeper    wasmlckeeper.Keeper
 	RatelimitKeeper     ratelimitkeeper.Keeper
 
 	ScopedIBCKeeper           capabilitykeeper.ScopedKeeper
@@ -384,7 +378,6 @@ func NewChainApp(
 		icacontrollertypes.StoreKey,
 		tokenfactorytypes.StoreKey,
 		packetforwardtypes.StoreKey,
-		wasmlctypes.StoreKey,
 		ratelimittypes.StoreKey,
 	)
 
@@ -748,40 +741,9 @@ func NewChainApp(
 		app.GRPCQueryRouter(),
 		wasmDir,
 		wasmConfig,
-		strings.Join(AllCapabilities(), ","),
+		AllCapabilities(),
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 		wasmOpts...,
-	)
-
-	wasmLightClientQuerier := wasmlctypes.QueryPlugins{
-		// Custom: MyCustomQueryPlugin(),
-		// `myAcceptList` is a `[]string` containing the list of gRPC query paths that the chain wants to allow for the `08-wasm` module to query.
-		// These queries must be registered in the chain's gRPC query router, be deterministic, and track their gas usage.
-		// The `AcceptListStargateQuerier` function will return a query plugin that will only allow queries for the paths in the `myAcceptList`.
-		// The query responses are encoded in protobuf unlike the implementation in `x/wasm`.
-		Stargate: wasmlctypes.AcceptListStargateQuerier([]string{
-			"/ibc.core.client.v1.Query/ClientState",
-			"/ibc.core.client.v1.Query/ConsensusState",
-			"/ibc.core.connection.v1.Query/Connection",
-		}),
-	}
-
-	dataDir := filepath.Join(homePath, "data")
-
-	var memCacheSizeMB uint32 = 100
-	lc08, err := wasmvm.NewVM(filepath.Join(dataDir, "08-light-client"), capabilities, 32, false, memCacheSizeMB)
-	if err != nil {
-		panic(fmt.Sprintf("failed to create VM for 08 light client: %s", err))
-	}
-
-	app.WasmClientKeeper = wasmlckeeper.NewKeeperWithVM(
-		appCodec,
-		runtime.NewKVStoreService(keys[wasmlctypes.StoreKey]),
-		app.IBCKeeper.ClientKeeper,
-		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
-		lc08,
-		bApp.GRPCQueryRouter(),
-		wasmlckeeper.WithQueryPlugins(&wasmLightClientQuerier),
 	)
 
 	// Create Transfer Stack
@@ -876,7 +838,6 @@ func NewChainApp(
 		// custom
 		tokenfactory.NewAppModule(app.TokenFactoryKeeper, app.AccountKeeper, app.BankKeeper, app.GetSubspace(tokenfactorytypes.ModuleName)),
 		packetforward.NewAppModule(app.PacketForwardKeeper, app.GetSubspace(packetforwardtypes.ModuleName)),
-		wasmlc.NewAppModule(app.WasmClientKeeper),
 		ratelimit.NewAppModule(appCodec, app.RatelimitKeeper),
 	)
 
@@ -918,7 +879,6 @@ func NewChainApp(
 		wasmtypes.ModuleName,
 		tokenfactorytypes.ModuleName,
 		packetforwardtypes.ModuleName,
-		wasmlctypes.ModuleName,
 		ratelimittypes.ModuleName,
 	)
 
@@ -938,7 +898,6 @@ func NewChainApp(
 		wasmtypes.ModuleName,
 		tokenfactorytypes.ModuleName,
 		packetforwardtypes.ModuleName,
-		wasmlctypes.ModuleName,
 		ratelimittypes.ModuleName,
 	)
 
@@ -980,7 +939,6 @@ func NewChainApp(
 		wasmtypes.ModuleName, // wasm after ibc transfer
 		tokenfactorytypes.ModuleName,
 		packetforwardtypes.ModuleName,
-		wasmlctypes.ModuleName,
 		ratelimittypes.ModuleName,
 	}
 	app.ModuleManager.SetOrderInitGenesis(genesisModuleOrder...)
@@ -1060,7 +1018,6 @@ func NewChainApp(
 	if manager := app.SnapshotManager(); manager != nil {
 		err := manager.RegisterExtensions(
 			wasmkeeper.NewWasmSnapshotter(app.CommitMultiStore(), &app.WasmKeeper),
-			wasmlckeeper.NewWasmSnapshotter(app.CommitMultiStore(), &app.WasmClientKeeper),
 		)
 		if err != nil {
 			panic(fmt.Errorf("failed to register snapshot extension: %s", err))
@@ -1113,9 +1070,6 @@ func NewChainApp(
 			panic(fmt.Sprintf("failed initialize pinned codes %s", err))
 		}
 
-		if err := wasmlckeeper.InitializePinnedCodes(ctx); err != nil {
-			panic(fmt.Sprintf("wasmlckeeper failed initialize pinned codes %s", err))
-		}
 	}
 
 	return app
