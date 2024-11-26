@@ -3,7 +3,7 @@ project_name: vector
 release:
   github:
     owner: vector-org
-    name: vector
+    name: blockchain
   name_template: '{{.Tag}}'
 
 # Only uncomment os, arch, and targets if you are NOT using cosmwasm / wasm-light-client.
