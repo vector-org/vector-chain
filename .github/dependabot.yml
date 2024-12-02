@@ -1,0 +1,10 @@
+# .github/dependabot.yml
+
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/"
+    target-branch: "test"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
