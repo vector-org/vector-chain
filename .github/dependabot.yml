@@ -6,5 +6,4 @@ updates:
     directory: "/"
     target-branch: "test"
     schedule:
-      interval: "weekly"
-      day: "sunday"
+      interval: "monthly"
