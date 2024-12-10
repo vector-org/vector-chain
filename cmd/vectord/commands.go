@@ -81,6 +81,7 @@ func initAppConfig() (string, interface{}) {
 	// In simapp, we set the min gas prices to 0.
 	srvCfg.MinGasPrices = "1uvctr"
 	// srvCfg.BaseConfig.IAVLDisableFastNode = true // disable fastnode by default
+	srvCfg.QueryGasLimit = 1_000_000
 
 	customAppConfig := CustomAppConfig{
 		Config: *srvCfg,
