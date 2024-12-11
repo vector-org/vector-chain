@@ -318,6 +318,14 @@ sh-testnet: mod-tidy
 ###############################################################################
 ###                                     e2e-scripts                         ###
 ###############################################################################
+init-test-framework: clean-testing-data
+	@echo "Initializing test framework"
+	@./scripts/tests/init-test-framework.sh
+
+
+test-tokenfactory:
+	@echo "Running tokenfactory test"
+	@./scripts/tests/tokenfactory/tokenfactory.sh
 
 clean-testing-data:
 	@echo "Killing migallod and removing previous data"

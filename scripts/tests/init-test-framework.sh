@@ -32,6 +32,16 @@ export CHAIN_2_ROSETTA=8081
 # Block time
 export BLOCK_TIME="1s"
 
+# Mnemonics for different accounts
+VAL_MNEMONIC_1="clock post desk civil pottery foster expand merit dash seminar song memory figure uniform spice circle try happy obvious trash crime hybrid hood cushion"
+VAL_MNEMONIC_2="angry twist harsh drastic left brass behave host shove marriage fall update business leg direct reward object ugly security warm tuna model broccoli choice"
+WALLET_MNEMONIC_1="banner spread envelope side kite person disagree path silver will brother under couch edit food venture squirrel civil budget number acquire point work mass"
+WALLET_MNEMONIC_2="veteran try aware erosion drink dance decade comic dawn museum release episode original list ability owner size tuition surface ceiling depth seminar capable only"
+WALLET_MNEMONIC_3="vacuum burst ordinary enact leaf rabbit gather lend left chase park action dish danger green jeans lucky dish mesh language collect acquire waste load"
+WALLET_MNEMONIC_4="open attitude harsh casino rent attitude midnight debris describe spare cancel crisp olive ride elite gallery leaf buffalo sheriff filter rotate path begin soldier"
+RLY_MNEMONIC_1="alley afraid soup fall idea toss can goose become valve initial strong forward bright dish figure check leopard decide warfare hub unusual join cart"
+RLY_MNEMONIC_2="record gift you once hip style during joke field prize dust unique length more pencil transfer quit train device arrive energy sort steak upset"
+
 # Check if binary exists
 if [ -z `which $BINARY` ]; then
     make install
@@ -49,8 +59,6 @@ init_chain() {
     local home_dir=$1
     local chain_id=$2
     local moniker=$3
-    local key=$4
-    local mnemonic=$5
 
     # Remove existing data
     rm -rf $home_dir
@@ -59,11 +67,58 @@ init_chain() {
     $BINARY config set client chain-id $chain_id --home $home_dir
     $BINARY config set client keyring-backend $KEYRING --home $home_dir
 
-    # Add key
-    echo "$mnemonic" | $BINARY keys add $key --keyring-backend $KEYRING --algo $KEYALGO --recover --home $home_dir
+    # Add keys
+    add_keys() {
+        local prefix=$1
+        local mnemonic=$2
+        
+        echo "Adding key '$prefix' with mnemonic:"
+        echo "$mnemonic"
+        echo "Command: $BINARY keys add $prefix --keyring-backend $KEYRING --algo $KEYALGO --recover --home $home_dir"
+        echo "$mnemonic" | $BINARY keys add "${prefix}" --keyring-backend $KEYRING --algo $KEYALGO --recover --home $home_dir
+    }
 
-    # Initialize chain
-    $BINARY init $moniker --chain-id $chain_id --default-denom $DENOM --home $home_dir
+    # Add all keys
+    if [ "$chain_id" = "$CHAIN_1_ID" ]; then
+        add_keys "val1" "$VAL_MNEMONIC_1"
+        add_keys "wallet1" "$WALLET_MNEMONIC_1"
+        add_keys "wallet3" "$WALLET_MNEMONIC_3"
+        add_keys "rly1" "$RLY_MNEMONIC_1"
+    else
+        add_keys "val2" "$VAL_MNEMONIC_2"
+        add_keys "wallet2" "$WALLET_MNEMONIC_2"
+        add_keys "wallet4" "$WALLET_MNEMONIC_4"
+        add_keys "rly2" "$RLY_MNEMONIC_2"
+    fi
+
+    echo "Initializing chain $chain_id with moniker $moniker"
+    $BINARY init $moniker --chain-id $chain_id --default-denom $DENOM --home $home_dir &>/dev/null
+
+
+    # Get addresses
+    if [ "$chain_id" = "$CHAIN_1_ID" ]; then
+        VAL1_ADDR=$($BINARY keys show val1 --home $home_dir --keyring-backend test -a)
+        WALLET1_ADDR=$($BINARY keys show wallet1 --home $home_dir --keyring-backend test -a)
+        WALLET3_ADDR=$($BINARY keys show wallet3 --home $home_dir --keyring-backend test -a)
+        RLY1_ADDR=$($BINARY keys show rly1 --home $home_dir --keyring-backend test -a)
+
+        # Add genesis accounts
+        $BINARY genesis add-genesis-account $VAL1_ADDR "1000000000000${DENOM}" --home $home_dir
+        $BINARY genesis add-genesis-account $WALLET1_ADDR "1000000000000${DENOM}" --home $home_dir
+        $BINARY genesis add-genesis-account $WALLET3_ADDR "1000000000000${DENOM}" --vesting-amount "10000000000${DENOM}" --vesting-start-time $(date +%s) --vesting-end-time $(($(date '+%s') + 100000023)) --home $home_dir
+        $BINARY genesis add-genesis-account $RLY1_ADDR "1000000000000${DENOM}" --home $home_dir
+    else
+        VAL2_ADDR=$($BINARY keys show val2 --home $home_dir --keyring-backend test -a)
+        WALLET2_ADDR=$($BINARY keys show wallet2 --home $home_dir --keyring-backend test -a)
+        WALLET4_ADDR=$($BINARY keys show wallet4 --home $home_dir --keyring-backend test -a)
+        RLY2_ADDR=$($BINARY keys show rly2 --home $home_dir --keyring-backend test -a)
+
+        # Add genesis accounts
+        $BINARY genesis add-genesis-account $VAL2_ADDR "1000000000000${DENOM}" --home $home_dir
+        $BINARY genesis add-genesis-account $WALLET2_ADDR "1000000000000${DENOM}" --home $home_dir
+        $BINARY genesis add-genesis-account $WALLET4_ADDR "1000000000000${DENOM}" --vesting-amount "10000000000${DENOM}" --vesting-start-time $(date +%s) --vesting-end-time $(($(date '+%s') + 100000023)) --home $home_dir
+        $BINARY genesis add-genesis-account $RLY2_ADDR "1000000000000${DENOM}" --home $home_dir
+    fi
 
     # Update genesis
     update_test_genesis() {
@@ -84,15 +139,14 @@ init_chain() {
     update_test_genesis '.app_state["tokenfactory"]["params"]["denom_creation_fee"]=[]'
     update_test_genesis '.app_state["tokenfactory"]["params"]["denom_creation_gas_consume"]=100000'
 
-    # Add genesis accounts
-    $BINARY genesis add-genesis-account $key 10000000$DENOM --keyring-backend $KEYRING --home $home_dir
-
     # Generate genesis transaction
-    $BINARY genesis gentx $key 1000000$DENOM --keyring-backend $KEYRING --chain-id $chain_id --home $home_dir
+    if [ "$chain_id" = "$CHAIN_1_ID" ]; then
+        $BINARY genesis gentx val1 7000000000$DENOM --keyring-backend $KEYRING --chain-id $chain_id --home $home_dir
+    else
+        $BINARY genesis gentx val2 7000000000$DENOM --keyring-backend $KEYRING --chain-id $chain_id --home $home_dir
+    fi
 
     $BINARY genesis collect-gentxs --home $home_dir
-
-    # Validate genesis
     $BINARY genesis validate-genesis --home $home_dir
 }
 
@@ -131,8 +185,8 @@ update_config() {
 
 # Initialize both chains
 echo "Initializing $CHAIN_1_ID & $CHAIN_2_ID..."
-init_chain $CHAIN_1_HOME $CHAIN_1_ID $CHAIN_1_MONIKER "val1" "decorate bright ozone fork gallery riot bus exhaust worth way bone indoor calm squirrel merry zero scheme cotton until shop any excess stage laundry"
-init_chain $CHAIN_2_HOME $CHAIN_2_ID $CHAIN_2_MONIKER "val2" "wealth flavor believe regret funny network recall kiss grape useless pepper cram hint member few certain unveil rather brick bargain curious require crowd raise"
+init_chain $CHAIN_1_HOME $CHAIN_1_ID $CHAIN_1_MONIKER 
+init_chain $CHAIN_2_HOME $CHAIN_2_ID $CHAIN_2_MONIKER 
 
 # Update configurations
 echo "Updating configuration files..."

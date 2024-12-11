@@ -2,3 +2,4 @@ configs/logs.json
 dist/
 build/
 mytestnet
+data/
