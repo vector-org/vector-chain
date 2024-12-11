@@ -41,12 +41,10 @@ echo "TX_HASH: $TX_HASH"
 sleep 3
 
 echo "SUCCESS: Minted $MINT_RES"
-$BINARY query tx $TX_HASH -o json --home $CHAIN_DIR/$CHAIN_ID_1 --node tcp://localhost:16657 
-
 echo "----------------------------------------"
 
 echo "Querying $TOKEN_DENOM from $WALLET_1 on chain test1 to validate the amount minted"
-BALANCE_RES_AMOUNT=$($BINARY query bank balances $WALLET_1 --denom $CREATED_RES_DENOM --node tcp://localhost:16657 -o json | jq -r '.amount')
+BALANCE_RES_AMOUNT=$($BINARY query bank balances $WALLET_1 --node tcp://localhost:16657 -o json | jq -r --arg DENOM "$CREATED_RES_DENOM" '.balances[] | select(.denom==$DENOM) | .amount')
 if [ "$BALANCE_RES_AMOUNT" != $MINT_AMOUNT ]; then
     echo "ERROR: Tokenfactory minting error. Expected minted balance '$MINT_AMOUNT', got '$BALANCE_RES_AMOUNT'"
     exit 1
