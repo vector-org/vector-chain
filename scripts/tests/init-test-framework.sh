@@ -196,8 +196,34 @@ update_config $CHAIN_2_HOME $CHAIN_2_RPC $CHAIN_2_P2P $CHAIN_2_REST $CHAIN_2_GRP
 # Start chains
 echo "Starting $CHAIN_1_ID in $CHAIN_DIR..."
 echo "Creating log file at $CHAIN_DIR/$CHAIN_1_ID.log"
-$BINARY start --home $CHAIN_1_HOME --pruning=nothing --minimum-gas-prices=0$DENOM > $CHAIN_DIR/$CHAIN_1_ID.log 2>&1 &
+$BINARY start --home $CHAIN_1_HOME \
+    --pruning=nothing \
+    --minimum-gas-prices=0$DENOM \
+    --grpc.address="0.0.0.0:$CHAIN_1_GRPC" \
+    --rpc.laddr="tcp://0.0.0.0:$CHAIN_1_RPC" \
+    > $CHAIN_DIR/$CHAIN_1_ID.log 2>&1 &
 
 echo "Starting $CHAIN_2_ID in $CHAIN_DIR..."
 echo "Creating log file at $CHAIN_DIR/$CHAIN_2_ID.log"
-$BINARY start --home $CHAIN_2_HOME --pruning=nothing --minimum-gas-prices=0$DENOM > $CHAIN_DIR/$CHAIN_2_ID.log 2>&1 &
+$BINARY start --home $CHAIN_2_HOME \
+    --pruning=nothing \
+    --minimum-gas-prices=0$DENOM \
+    --grpc.address="0.0.0.0:$CHAIN_2_GRPC" \
+    --rpc.laddr="tcp://0.0.0.0:$CHAIN_2_RPC" \
+    > $CHAIN_DIR/$CHAIN_2_ID.log 2>&1 &
+
+# Wait for chains to start
+sleep 5
+
+# Check if chains are running
+if ! nc -z localhost $CHAIN_1_RPC; then
+    echo "ERROR: Chain 1 failed to start. Check logs at $CHAIN_DIR/$CHAIN_1_ID.log"
+    exit 1
+fi
+
+if ! nc -z localhost $CHAIN_2_RPC; then
+    echo "ERROR: Chain 2 failed to start. Check logs at $CHAIN_DIR/$CHAIN_2_ID.log"
+    exit 1
+fi
+
+echo "Both chains started successfully!"

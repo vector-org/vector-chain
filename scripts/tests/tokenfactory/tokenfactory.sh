@@ -17,7 +17,7 @@ FEES=1000000uvctr
 # Get wallet addresses from the initialized test framework
 WALLET_1=$($BINARY keys show val1 -a --keyring-backend test --home $CHAIN_DIR/test-1)
 WALLET_2=$($BINARY keys show val2 -a --keyring-backend test --home $CHAIN_DIR/test-2)
-WALLET_3=$($BINARY keys show val3 -a --keyring-backend test --home $CHAIN_DIR/test-1)
+WALLET_3=$($BINARY keys show wallet3 -a --keyring-backend test --home $CHAIN_DIR/test-1) # Corrected from val3 to wallet3
 
 echo "Creating token denom $TOKEN_DENOM with $WALLET_1 on chain test-1"
 TX_HASH=$($BINARY tx tokenfactory create-denom $TOKEN_DENOM --from $WALLET_1 --home $CHAIN_DIR/test-1 --chain-id test-1 --node tcp://localhost:16657 --gas "$GAS" --fees "$FEES" --keyring-backend test -o json -y | jq -r '.txhash')
@@ -29,3 +29,10 @@ if [ "$CREATED_RES_DENOM" != "factory/$WALLET_1/$TOKEN_DENOM" ]; then
     exit 1
 fi
 
+# Ensure the node is running and accessible
+if ! nc -z localhost 16657; then
+    echo "ERROR: Node is not running or not accessible at tcp://localhost:16657"
+    exit 1
+fi
+
+# Continue with the rest of the script...
