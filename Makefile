@@ -7,6 +7,7 @@ LEDGER_ENABLED ?= true
 SDK_PACK := $(shell go list -m github.com/cosmos/cosmos-sdk | sed  's/ /\@/g')
 BINDIR ?= $(GOPATH)/bin
 SIMAPP = ./app
+BINARY ?= vectord
 
 # for dockerized protobuf tools
 DOCKER := $(shell which docker)
@@ -313,6 +314,16 @@ sh-testnet: mod-tidy
 	CHAIN_ID="localchain-1" BLOCK_TIME="1000ms" CLEAN=true sh scripts/test_node.sh
 
 .PHONY: setup-testnet set-testnet-configs testnet testnet-basic sh-testnet
+
+###############################################################################
+###                                     e2e-scripts                         ###
+###############################################################################
+
+clean-testing-data:
+	@echo "Killing migallod and removing previous data"
+	-@pkill $(BINARY) 2>/dev/null
+	-@pkill rly 2>/dev/null
+	-@rm -rf ./data
 
 ###############################################################################
 ###                                     help                                ###
