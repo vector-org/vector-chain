@@ -8,7 +8,7 @@ export KEYALGO="secp256k1"
 
 # Chain 1 configuration
 export CHAIN_DIR="data"
-export CHAIN_1_ID="test-1"
+export CHAIN_1_ID="test1"
 export CHAIN_1_MONIKER="validator-1"
 export CHAIN_1_HOME="$CHAIN_DIR/$CHAIN_1_ID"
 export CHAIN_1_RPC=16657
@@ -19,7 +19,7 @@ export CHAIN_1_GRPC_WEB=8091
 export CHAIN_1_ROSETTA=8080
 
 # Chain 2 configuration
-export CHAIN_2_ID="test-2"
+export CHAIN_2_ID="test2"
 export CHAIN_2_MONIKER="validator-2"
 export CHAIN_2_HOME="$CHAIN_DIR/$CHAIN_2_ID"
 export CHAIN_2_RPC=26657

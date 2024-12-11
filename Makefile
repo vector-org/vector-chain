@@ -321,6 +321,7 @@ sh-testnet: mod-tidy
 init-test-framework: clean-testing-data
 	@echo "Initializing test framework"
 	@./scripts/tests/init-test-framework.sh
+	@./scripts/tests/relayer/rly-init.sh
 
 
 test-tokenfactory:
@@ -328,7 +329,7 @@ test-tokenfactory:
 	@./scripts/tests/tokenfactory/tokenfactory.sh
 
 clean-testing-data:
-	@echo "Killing migallod and removing previous data"
+	@echo "Killing $(BINARY) and removing previous data"
 	-@pkill $(BINARY) 2>/dev/null
 	-@pkill rly 2>/dev/null
 	-@rm -rf ./data
