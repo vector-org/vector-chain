@@ -1,0 +1,40 @@
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+bash: scripts/run-node.sh: No such file or directory
+Starting node...
+panic: open /Users/kien6034/.vector/config/genesis.json: no such file or directory
+
+goroutine 1 [running]:
+github.com/cosmos/cosmos-sdk/server.DefaultBaseappOptions({0x103cf98f8, 0x14002256e00})
+        github.com/cosmos/cosmos-sdk@v0.50.10/server/util.go:518 +0x8a8
+main.newApp({0x103d40a78, 0x140015c1490}, {0x103d582c0, 0x14000bfa088}, {0x0, 0x0}, {0x103cf98f8, 0x14002256e00})
+        github.com/vector-org/vector/cmd/vectord/commands.go:198 +0x48
+github.com/cosmos/cosmos-sdk/server.startApp(0x14001713e60, 0x103ce50f0, {0x103ce5500, 0x0, 0x0, 0x0, 0x103ce5510})
+        github.com/cosmos/cosmos-sdk@v0.50.10/server/start.go:618 +0x1f4
+github.com/cosmos/cosmos-sdk/server.start(_, {{0x0, 0x0, 0x0}, {0x103d5dc58, 0x14001a25590}, 0x0, {0x14001331040, 0xc}, {0x103d7df90, ...}, ...}, ...)
+        github.com/cosmos/cosmos-sdk@v0.50.10/server/start.go:224 +0xdc
+github.com/cosmos/cosmos-sdk/server.StartCmdWithOptions.func2.1()
+        github.com/cosmos/cosmos-sdk@v0.50.10/server/start.go:198 +0x68
+github.com/cosmos/cosmos-sdk/server.wrapCPUProfile(0x14001713e60, 0x140013a99c8)
+        github.com/cosmos/cosmos-sdk@v0.50.10/server/start.go:570 +0x16c
+github.com/cosmos/cosmos-sdk/server.StartCmdWithOptions.func2(0x14002264908, {0x140019e95c0?, 0x0?, 0x4?})
+        github.com/cosmos/cosmos-sdk@v0.50.10/server/start.go:197 +0x184
+github.com/spf13/cobra.(*Command).execute(0x14002264908, {0x140019e9480, 0x4, 0x4})
+        github.com/spf13/cobra@v1.8.1/command.go:985 +0x834
+github.com/spf13/cobra.(*Command).ExecuteC(0x140004edb08)
+        github.com/spf13/cobra@v1.8.1/command.go:1117 +0x344
+github.com/spf13/cobra.(*Command).Execute(...)
+        github.com/spf13/cobra@v1.8.1/command.go:1041
+github.com/spf13/cobra.(*Command).ExecuteContext(...)
+        github.com/spf13/cobra@v1.8.1/command.go:1034
+github.com/cosmos/cosmos-sdk/server/cmd.Execute(0x140004edb08, {0x0, 0x0}, {0x14000e7e9d8, 0x17})
+        github.com/cosmos/cosmos-sdk@v0.50.10/server/cmd/execute.go:34 +0x154
+main.main()
+        github.com/vector-org/vector/cmd/vectord/main.go:15 +0x3c
