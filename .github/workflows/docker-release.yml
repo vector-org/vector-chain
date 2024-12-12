@@ -28,4 +28,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/my-awesome-app:latest
+          tags: ghcr.io/${{ github.repository_owner }}/vector-chain:latest
