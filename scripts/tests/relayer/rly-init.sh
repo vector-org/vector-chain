@@ -64,7 +64,7 @@ $BINARY tx channel test1-test2 --home $CHAIN_DIR/$RELAYER_DIR
 sleep 3
 
 echo "Starting to listen relayer..."
-$BINARY start test1-test2 -p events -b 100 --home $CHAIN_DIR/$RELAYER_DIR > $CHAIN_DIR/relayer.log 2>&1 &
+$BINARY start test1-test2 --debug -p events -b 100 --home $CHAIN_DIR/$RELAYER_DIR > $CHAIN_DIR/relayer.log 2>&1 &
 
 # # Wait for relayer to start and verify it's running
 # sleep 5
