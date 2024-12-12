@@ -54,7 +54,7 @@
     ],
     "genesis": {
       "name": "v1",
-      "genesis_url": "https://github.com/vector-org/vector/networks/raw/main/genesis.json"
+      "genesis_url": "https://github.com/vector-org/vector-chain/networks/raw/main/genesis.json"
     },
     "versions": [
       {

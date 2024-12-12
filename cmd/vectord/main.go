@@ -6,7 +6,7 @@ import (
 	"cosmossdk.io/log"
 
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
-	"github.com/vector-org/vector/app"
+	"github.com/vector-org/vector-chain/app"
 )
 
 func main() {

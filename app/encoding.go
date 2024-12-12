@@ -10,7 +10,7 @@ import (
 	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
-	"github.com/vector-org/vector/app/params"
+	"github.com/vector-org/vector-chain/app/params"
 )
 
 // MakeEncodingConfig creates a new EncodingConfig with all modules registered. For testing only

@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/vector-org/vector/app/upgrades"
+	"github.com/vector-org/vector-chain/app/upgrades"
 )
 
 // NewUpgrade constructor
