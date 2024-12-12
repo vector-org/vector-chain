@@ -7,7 +7,7 @@ export CHAIN_ID=${CHAIN_ID:-"localchain-1"}
 export MONIKER="localvalidator"
 export KEYALGO="secp256k1"
 export KEYRING=${KEYRING:-"test"}
-export HOME_DIR=$(eval echo "${HOME_DIR:-"~/.vector"}")
+export HOME_DIR=$(eval echo "${HOME_DIR:-"mytestnet"}")
 export BINARY=${BINARY:-vectord}
 export DENOM=${DENOM:-uvctr}
 

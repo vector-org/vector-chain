@@ -3,14 +3,22 @@
 # the upgrade is a fork, "true" otherwise
 FORK=${FORK:-"false"}
 
+
+# keys
+KEY="acc0"
+KEY2="acc1"
+
+# upgrade
 OLD_VERSION=v1.0.0
 UPGRADE_WAIT=${UPGRADE_WAIT:-20}
 HOME=mytestnet
 ROOT=$(pwd)
 DENOM=uvctr
-CHAIN_ID=localvector
+CHAIN_ID=localchain-1
 SOFTWARE_UPGRADE_NAME="v0.2.0"
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+
 
 if [[ "$FORK" == "true" ]]; then
     export VECTOR_HALT_HEIGHT=20
@@ -130,7 +138,7 @@ EOF
     cat proposal.json
 
     ./_build/old/vectord tx gov submit-proposal proposal.json \
-        --from=val1 \
+        --from=$KEY \
         --keyring-backend=test \
         --chain-id=$CHAIN_ID \
         --home=$HOME \
@@ -139,7 +147,7 @@ EOF
 
     echo "Deposit"
     ./_build/old/vectord tx gov deposit 1 "10000000${DENOM}" \
-        --from val1 \
+        --from $KEY \
         --keyring-backend test \
         --chain-id $CHAIN_ID \
         --home $HOME \
@@ -151,7 +159,7 @@ EOF
 
     echo "Vote proposal validator1"
     ./_build/old/vectord tx gov vote 1 yes \
-        --from val1 \
+        --from $KEY \
         --keyring-backend test \
         --chain-id $CHAIN_ID \
         --home $HOME \
@@ -163,7 +171,7 @@ EOF
 
     echo "Vote proposal validator2"
     ./_build/old/vectord tx gov vote 1 yes \
-        --from val2 \
+        --from $KEY2 \
         --keyring-backend test \
         --chain-id $CHAIN_ID \
         --home $HOME \
@@ -188,7 +196,6 @@ EOF
         fi
     done
 }
-
 
 # if FORK = true
 if [[ "$FORK" == "true" ]]; then
