@@ -65,26 +65,3 @@ sleep 3
 
 echo "Starting to listen relayer..."
 $BINARY start test1-test2 --debug -p events -b 100 --home $CHAIN_DIR/$RELAYER_DIR > $CHAIN_DIR/relayer.log 2>&1 &
-
-# # Wait for relayer to start and verify it's running
-# sleep 5
-# if ! ps aux | grep -q "[r]ly start"; then
-#     echo "ERROR: Relayer failed to start. Check logs at $CHAIN_DIR/relayer.log"
-#     cat $CHAIN_DIR/relayer.log
-#     exit 1
-# fi
-
-# # Verify channel is ready
-# echo "Verifying channel setup..."
-# CHANNEL_INFO=$($BINARY q channels test1-test2 --home $CHAIN_DIR/$RELAYER_DIR)
-# if ! echo "$CHANNEL_INFO" | grep -q "channel-0"; then
-#     echo "ERROR: Channel not properly configured"
-#     echo "$CHANNEL_INFO"
-#     exit 1
-# fi
-
-# echo ""
-# echo "############################"
-# echo "# SUCCESS: Relayer created #"
-# echo "############################"
-# echo ""
