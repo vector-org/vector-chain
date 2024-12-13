@@ -5356,4 +5356,183 @@ Starting node...
 [90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m971.102 [36mheight=[0m50 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
 [90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{50/0 (9DB2656BB78F29967D43F67D2D1F371F46ACEFB2FAF24FD333F3846D458CF808:1:03FF1B13C753, -1) 92AE983D8DBA @ 2024-12-12T19:53:31.260591Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
 [90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m9DB2656BB78F29967D43F67D2D1F371F46ACEFB2FAF24FD333F3846D458CF808 [36mheight=[0m50 [36mmodule=[0mconsensus
-[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m9DB2656BB78F29967D43F67D2D1F371F46ACEFB2FAF24FD333F3846D45
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m9DB2656BB78F29967D43F67D2D1F371F46ACEFB2FAF24FD333F3846D458CF808 [36mheight=[0m50 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m1942C4D01FE821FF112C24132DC79A20FA75F18B03AFC191DF003D5282040B04
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m1CA354F292687FD25C59606AE0894E15D5689E184E1DB12A092C2C24BE410FB0 [36mheight=[0m50 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m1CA354F292687FD25C59606AE0894E15D5689E184E1DB12A092C2C24BE410FB0 [36mheight=[0m50 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m1942C4D01FE821FF112C24132DC79A20FA75F18B03AFC191DF003D5282040B04 [36mheight=[0m50 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m50 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m980.092 [36mheight=[0m51 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{51/0 (B06E2C8C2E208B9811353D0A19BBAF46038B21B3F0C5E61A7AD73A97CC28ED1C:1:5E0D3DFD6441, -1) 149D3D7927D5 @ 2024-12-12T19:53:32.290109Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0mB06E2C8C2E208B9811353D0A19BBAF46038B21B3F0C5E61A7AD73A97CC28ED1C [36mheight=[0m51 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0mB06E2C8C2E208B9811353D0A19BBAF46038B21B3F0C5E61A7AD73A97CC28ED1C [36mheight=[0m51 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m1CA354F292687FD25C59606AE0894E15D5689E184E1DB12A092C2C24BE410FB0
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m41788DF2908BDD26138B43D68CF63A8AD1CCED4FB6784AC862BBCEDA045573AC [36mheight=[0m51 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m41788DF2908BDD26138B43D68CF63A8AD1CCED4FB6784AC862BBCEDA045573AC [36mheight=[0m51 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m1CA354F292687FD25C59606AE0894E15D5689E184E1DB12A092C2C24BE410FB0 [36mheight=[0m51 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m51 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m981.977 [36mheight=[0m52 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{52/0 (00C2C73C974A11E63D463DB81FE658937085B8171385F84B44CE5C3F3773AEDB:1:65FFEA224E77, -1) 2AF7187A0668 @ 2024-12-12T19:53:33.317948Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m00C2C73C974A11E63D463DB81FE658937085B8171385F84B44CE5C3F3773AEDB [36mheight=[0m52 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m00C2C73C974A11E63D463DB81FE658937085B8171385F84B44CE5C3F3773AEDB [36mheight=[0m52 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m41788DF2908BDD26138B43D68CF63A8AD1CCED4FB6784AC862BBCEDA045573AC
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0mC81AAD0CE845DD3B4A9C60C846A337ABA82E986D1742D41CEB12A7816BD3C6AC [36mheight=[0m52 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0mC81AAD0CE845DD3B4A9C60C846A337ABA82E986D1742D41CEB12A7816BD3C6AC [36mheight=[0m52 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m41788DF2908BDD26138B43D68CF63A8AD1CCED4FB6784AC862BBCEDA045573AC [36mheight=[0m52 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m52 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m976.543 [36mheight=[0m53 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{53/0 (8A016B2C7251042BF9E49F35A55287CDB28D6BFCBDF93B2AE0034A15AB23BFFF:1:68887FC8DC26, -1) 3F47F91D825D @ 2024-12-12T19:53:34.350045Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m8A016B2C7251042BF9E49F35A55287CDB28D6BFCBDF93B2AE0034A15AB23BFFF [36mheight=[0m53 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m8A016B2C7251042BF9E49F35A55287CDB28D6BFCBDF93B2AE0034A15AB23BFFF [36mheight=[0m53 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0mC81AAD0CE845DD3B4A9C60C846A337ABA82E986D1742D41CEB12A7816BD3C6AC
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m547EC1AA5394560C4F633191E0AB1A262A202DA3F88AD7077C1A683E1A017F9C [36mheight=[0m53 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m547EC1AA5394560C4F633191E0AB1A262A202DA3F88AD7077C1A683E1A017F9C [36mheight=[0m53 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0mC81AAD0CE845DD3B4A9C60C846A337ABA82E986D1742D41CEB12A7816BD3C6AC [36mheight=[0m53 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m53 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m976.034 [36mheight=[0m54 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{54/0 (772D40FE3D25232A2092CFF3831C6F9CC9129BC8B4E9AE815FED606367756D25:1:AF0998AD44C9, -1) D62B2E6D1187 @ 2024-12-12T19:53:35.383394Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m772D40FE3D25232A2092CFF3831C6F9CC9129BC8B4E9AE815FED606367756D25 [36mheight=[0m54 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m772D40FE3D25232A2092CFF3831C6F9CC9129BC8B4E9AE815FED606367756D25 [36mheight=[0m54 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m547EC1AA5394560C4F633191E0AB1A262A202DA3F88AD7077C1A683E1A017F9C
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m37D84421245BD4298873E920B7C5BC5C166C63EAFD955B86BAA208D4CFF246EB [36mheight=[0m54 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m37D84421245BD4298873E920B7C5BC5C166C63EAFD955B86BAA208D4CFF246EB [36mheight=[0m54 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m547EC1AA5394560C4F633191E0AB1A262A202DA3F88AD7077C1A683E1A017F9C [36mheight=[0m54 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m54 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m973.877 [36mheight=[0m55 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{55/0 (4B1FCEFF68EDC77AF7C599A260F124379AFAB96B6B67717036F4FBEC9BAC1C60:1:6938C0B24D93, -1) 23E90FE4CE61 @ 2024-12-12T19:53:36.420055Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m4B1FCEFF68EDC77AF7C599A260F124379AFAB96B6B67717036F4FBEC9BAC1C60 [36mheight=[0m55 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m4B1FCEFF68EDC77AF7C599A260F124379AFAB96B6B67717036F4FBEC9BAC1C60 [36mheight=[0m55 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m37D84421245BD4298873E920B7C5BC5C166C63EAFD955B86BAA208D4CFF246EB
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m77D842C45AEA61FB3DA117EEE31CAC987D969693DFAAEBF1098890D824114E1B [36mheight=[0m55 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m77D842C45AEA61FB3DA117EEE31CAC987D969693DFAAEBF1098890D824114E1B [36mheight=[0m55 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m37D84421245BD4298873E920B7C5BC5C166C63EAFD955B86BAA208D4CFF246EB [36mheight=[0m55 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m55 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m975.899 [36mheight=[0m56 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{56/0 (26FFD3CDBAFC4CAF0F6D969BC3DB2C815B4035421343D1521AEDBAAAAD26F839:1:C8D9B067B4E7, -1) 9AB96A2720AD @ 2024-12-12T19:53:37.444228Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m26FFD3CDBAFC4CAF0F6D969BC3DB2C815B4035421343D1521AEDBAAAAD26F839 [36mheight=[0m56 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m26FFD3CDBAFC4CAF0F6D969BC3DB2C815B4035421343D1521AEDBAAAAD26F839 [36mheight=[0m56 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m77D842C45AEA61FB3DA117EEE31CAC987D969693DFAAEBF1098890D824114E1B
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m05F72C3C40AA42435C360EE08840BF17C6D9D6C99D6337E76EF1ECC41DB39524 [36mheight=[0m56 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m05F72C3C40AA42435C360EE08840BF17C6D9D6C99D6337E76EF1ECC41DB39524 [36mheight=[0m56 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m77D842C45AEA61FB3DA117EEE31CAC987D969693DFAAEBF1098890D824114E1B [36mheight=[0m56 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m56 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m980.949 [36mheight=[0m57 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{57/0 (6038ECDD95007CBE5FF97EA315107D72F4DFF8AA6F9B36425BB635C639134E42:1:905783474211, -1) 24B02BD5B4BB @ 2024-12-12T19:53:38.483157Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m6038ECDD95007CBE5FF97EA315107D72F4DFF8AA6F9B36425BB635C639134E42 [36mheight=[0m57 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m6038ECDD95007CBE5FF97EA315107D72F4DFF8AA6F9B36425BB635C639134E42 [36mheight=[0m57 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m05F72C3C40AA42435C360EE08840BF17C6D9D6C99D6337E76EF1ECC41DB39524
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m0948998CE354D13910269E239BC8CD5FEC908C35BC69615F2D3E0D400262E424 [36mheight=[0m57 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m0948998CE354D13910269E239BC8CD5FEC908C35BC69615F2D3E0D400262E424 [36mheight=[0m57 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m05F72C3C40AA42435C360EE08840BF17C6D9D6C99D6337E76EF1ECC41DB39524 [36mheight=[0m57 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m57 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m978.015 [36mheight=[0m58 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{58/0 (C84B11C49D1790E38A4C517674628E262CB5D776927D6950E3EAB201CA7933F0:1:190893164AF0, -1) C1768EC5285B @ 2024-12-12T19:53:39.517105Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0mC84B11C49D1790E38A4C517674628E262CB5D776927D6950E3EAB201CA7933F0 [36mheight=[0m58 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0mC84B11C49D1790E38A4C517674628E262CB5D776927D6950E3EAB201CA7933F0 [36mheight=[0m58 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m0948998CE354D13910269E239BC8CD5FEC908C35BC69615F2D3E0D400262E424
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m6B884E3AF109889F4AE429D7E3F39CAB35DA55A8FF0475513E22CD6F1F919277 [36mheight=[0m58 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m6B884E3AF109889F4AE429D7E3F39CAB35DA55A8FF0475513E22CD6F1F919277 [36mheight=[0m58 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m0948998CE354D13910269E239BC8CD5FEC908C35BC69615F2D3E0D400262E424 [36mheight=[0m58 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m58 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mEnsure peers[0m [36mmodule=[0mpex [36mnumDialing=[0m0 [36mnumInPeers=[0m0 [36mnumOutPeers=[0m0 [36mnumToDial=[0m10
+[90m2:53AM[0m [32mINF[0m [1mNo addresses to dial. Falling back to seeds[0m [36mmodule=[0mpex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m979.961 [36mheight=[0m59 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{59/0 (0EBAA0F7946C4FF255F1ADB73E70EEBD5DAC0F8DCF4C2BD749C98178BA9939C4:1:10A49C1BEA2C, -1) 9CC2195E02C9 @ 2024-12-12T19:53:40.546041Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m0EBAA0F7946C4FF255F1ADB73E70EEBD5DAC0F8DCF4C2BD749C98178BA9939C4 [36mheight=[0m59 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m0EBAA0F7946C4FF255F1ADB73E70EEBD5DAC0F8DCF4C2BD749C98178BA9939C4 [36mheight=[0m59 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m6B884E3AF109889F4AE429D7E3F39CAB35DA55A8FF0475513E22CD6F1F919277
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m5C387F08226E5D338E1963BCAC54D1288F0B76BDDDE513E3B16E474AFE61CCF3 [36mheight=[0m59 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m5C387F08226E5D338E1963BCAC54D1288F0B76BDDDE513E3B16E474AFE61CCF3 [36mheight=[0m59 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m6B884E3AF109889F4AE429D7E3F39CAB35DA55A8FF0475513E22CD6F1F919277 [36mheight=[0m59 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m59 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m981.931 [36mheight=[0m60 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{60/0 (C7A6D52ACA8EFA4FE79CE994DFE4788E3874F8670901C45D9A4714933C4F752C:1:1BDA8D1741D8, -1) AA6C7BE18ADF @ 2024-12-12T19:53:41.57666Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0mC7A6D52ACA8EFA4FE79CE994DFE4788E3874F8670901C45D9A4714933C4F752C [36mheight=[0m60 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0mC7A6D52ACA8EFA4FE79CE994DFE4788E3874F8670901C45D9A4714933C4F752C [36mheight=[0m60 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m5C387F08226E5D338E1963BCAC54D1288F0B76BDDDE513E3B16E474AFE61CCF3
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m3B312F63E04D86168267FE16816E9632CF314F5ED06B4A08847ABF898B9E4540 [36mheight=[0m60 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m3B312F63E04D86168267FE16816E9632CF314F5ED06B4A08847ABF898B9E4540 [36mheight=[0m60 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m5C387F08226E5D338E1963BCAC54D1288F0B76BDDDE513E3B16E474AFE61CCF3 [36mheight=[0m60 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m60 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m979.911 [36mheight=[0m61 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{61/0 (C9B83B8BBD900CAC4B4BDFF75D90F26813FCACF0B3FB71240E92227F76467904:1:8E0E0CC32881, -1) FB83A4DDEB43 @ 2024-12-12T19:53:42.612701Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0mC9B83B8BBD900CAC4B4BDFF75D90F26813FCACF0B3FB71240E92227F76467904 [36mheight=[0m61 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0mC9B83B8BBD900CAC4B4BDFF75D90F26813FCACF0B3FB71240E92227F76467904 [36mheight=[0m61 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m3B312F63E04D86168267FE16816E9632CF314F5ED06B4A08847ABF898B9E4540
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m542ABBC7F1360DD20AF5EABFC918A4B5C9F54FB63B184AE5412A9644AA39F9FA [36mheight=[0m61 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m542ABBC7F1360DD20AF5EABFC918A4B5C9F54FB63B184AE5412A9644AA39F9FA [36mheight=[0m61 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m3B312F63E04D86168267FE16816E9632CF314F5ED06B4A08847ABF898B9E4540 [36mheight=[0m61 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m61 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m980.035 [36mheight=[0m62 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{62/0 (70C8D3874DB7F2A176615D85C9FE1F70BEBBD30311A1102B40F40F1AD131C13B:1:639126B8E796, -1) D3BC6A8DD80F @ 2024-12-12T19:53:43.642086Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m70C8D3874DB7F2A176615D85C9FE1F70BEBBD30311A1102B40F40F1AD131C13B [36mheight=[0m62 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m70C8D3874DB7F2A176615D85C9FE1F70BEBBD30311A1102B40F40F1AD131C13B [36mheight=[0m62 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m542ABBC7F1360DD20AF5EABFC918A4B5C9F54FB63B184AE5412A9644AA39F9FA
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0mA7A8E2B66CAD0DFEBAECAD0B187372D5CE89E383D4031B66D6699C9C49025F88 [36mheight=[0m62 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0mA7A8E2B66CAD0DFEBAECAD0B187372D5CE89E383D4031B66D6699C9C49025F88 [36mheight=[0m62 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m542ABBC7F1360DD20AF5EABFC918A4B5C9F54FB63B184AE5412A9644AA39F9FA [36mheight=[0m62 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m62 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m975.044 [36mheight=[0m63 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{63/0 (6F8656B2A5A14E2D859202E7FD9ECF3864D799F1060E13465CC70C39ABF06817:1:3E4BEBB5B836, -1) BF6CE7EEE183 @ 2024-12-12T19:53:44.691072Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m6F8656B2A5A14E2D859202E7FD9ECF3864D799F1060E13465CC70C39ABF06817 [36mheight=[0m63 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m6F8656B2A5A14E2D859202E7FD9ECF3864D799F1060E13465CC70C39ABF06817 [36mheight=[0m63 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0mA7A8E2B66CAD0DFEBAECAD0B187372D5CE89E383D4031B66D6699C9C49025F88
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m813A823D0647B4B83C6C95581C69A969C9F1B964A6E59EEF3C92822A189FBF2D [36mheight=[0m63 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m813A823D0647B4B83C6C95581C69A969C9F1B964A6E59EEF3C92822A189FBF2D [36mheight=[0m63 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0mA7A8E2B66CAD0DFEBAECAD0B187372D5CE89E383D4031B66D6699C9C49025F88 [36mheight=[0m63 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m63 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m980.681 [36mheight=[0m64 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{64/0 (E86943274DAB7A1F17477DB75039D6B01CEA65649EFC96954A7A8205E9DFB76C:1:2E2BFE2A54EE, -1) 1F4136FB8B34 @ 2024-12-12T19:53:45.721058Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0mE86943274DAB7A1F17477DB75039D6B01CEA65649EFC96954A7A8205E9DFB76C [36mheight=[0m64 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0mE86943274DAB7A1F17477DB75039D6B01CEA65649EFC96954A7A8205E9DFB76C [36mheight=[0m64 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m813A823D0647B4B83C6C95581C69A969C9F1B964A6E59EEF3C92822A189FBF2D
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m30942D97783B7BD857D6B283089DDF18DD00FA7522112B22EF3C72E75FFD927F [36mheight=[0m64 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m30942D97783B7BD857D6B283089DDF18DD00FA7522112B22EF3C72E75FFD927F [36mheight=[0m64 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m813A823D0647B4B83C6C95581C69A969C9F1B964A6E59EEF3C92822A189FBF2D [36mheight=[0m64 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m64 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m977.099 [36mheight=[0m65 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{65/0 (7C0DCE7913A3CAEA6138642B8B1CFA3AA7BA858E2D9B2CDDF1E8CB4B9E05C991:1:06E05EAF496B, -1) 2ACE2C967ABF @ 2024-12-12T19:53:46.818888Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m7C0DCE7913A3CAEA6138642B8B1CFA3AA7BA858E2D9B2CDDF1E8CB4B9E05C991 [36mheight=[0m65 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m7C0DCE7913A3CAEA6138642B8B1CFA3AA7BA858E2D9B2CDDF1E8CB4B9E05C991 [36mheight=[0m65 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m30942D97783B7BD857D6B283089DDF18DD00FA7522112B22EF3C72E75FFD927F
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m18799953F89C922AB0DD45A0C348B9228D38EF80042CA2ED650FCD7B0473E5C1 [36mheight=[0m65 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m18799953F89C922AB0DD45A0C348B9228D38EF80042CA2ED650FCD7B0473E5C1 [36mheight=[0m65 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m30942D97783B7BD857D6B283089DDF18DD00FA7522112B22EF3C72E75FFD927F [36mheight=[0m65 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m65 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m944.593 [36mheight=[0m66 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{66/0 (D6131F88B5EAA2F4833919B676AD6E9F57380AD1931298E4048FDAB93B7A1815:1:67CA9859560E, -1) 8FF323F4E0F7 @ 2024-12-12T19:53:48.050371Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0mD6131F88B5EAA2F4833919B676AD6E9F57380AD1931298E4048FDAB93B7A1815 [36mheight=[0m66 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0mD6131F88B5EAA2F4833919B676AD6E9F57380AD1931298E4048FDAB93B7A1815 [36mheight=[0m66 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0m18799953F89C922AB0DD45A0C348B9228D38EF80042CA2ED650FCD7B0473E5C1
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0mBDA6C1884F1D83FADD315CBEDC8DC3030CA11DC48721262B0CF4262261E0D7B2 [36mheight=[0m66 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0mBDA6C1884F1D83FADD315CBEDC8DC3030CA11DC48721262B0CF4262261E0D7B2 [36mheight=[0m66 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0m18799953F89C922AB0DD45A0C348B9228D38EF80042CA2ED650FCD7B0473E5C1 [36mheight=[0m66 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m66 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m980.071 [36mheight=[0m67 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{67/0 (D328C3B46F410D987E404DBE31669F82575E769FD9CC4F34EEDA77FA48434169:1:7F670DF127F9, -1) A955C8559BB3 @ 2024-12-12T19:53:49.086406Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0mD328C3B46F410D987E404DBE31669F82575E769FD9CC4F34EEDA77FA48434169 [36mheight=[0m67 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0mD328C3B46F410D987E404DBE31669F82575E769FD9CC4F34EEDA77FA48434169 [36mheight=[0m67 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0mBDA6C1884F1D83FADD315CBEDC8DC3030CA11DC48721262B0CF4262261E0D7B2
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0mD620EB4CD3679B2D6A2EE32052EC04CE229F5907951764FE5A418D70026D3DDD [36mheight=[0m67 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0mD620EB4CD3679B2D6A2EE32052EC04CE229F5907951764FE5A418D70026D3DDD [36mheight=[0m67 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0mBDA6C1884F1D83FADD315CBEDC8DC3030CA11DC48721262B0CF4262261E0D7B2 [36mheight=[0m67 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m67 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mTimed out[0m [36mdur=[0m980.021 [36mheight=[0m68 [36mmodule=[0mconsensus [36mround=[0m0 [36mstep=[0mRoundStepNewHeight
+[90m2:53AM[0m [32mINF[0m [1mreceived proposal[0m [36mmodule=[0mconsensus [36mproposal=[0m"Proposal{68/0 (6718BDB1B0B819AA9DA517A6AEE385CB56B8767835BA460912D863D208142F35:1:0A35DCD75E3B, -1) 8D4561C4C182 @ 2024-12-12T19:53:50.120399Z}" [36mproposer=[0m492BCA611B8E20060F51976D8D981880C0F5C7AA
+[90m2:53AM[0m [32mINF[0m [1mreceived complete proposal block[0m [36mhash=[0m6718BDB1B0B819AA9DA517A6AEE385CB56B8767835BA460912D863D208142F35 [36mheight=[0m68 [36mmodule=[0mconsensus
+[90m2:53AM[0m [32mINF[0m [1mfinalizing commit of block[0m [36mhash=[0m6718BDB1B0B819AA9DA517A6AEE385CB56B8767835BA460912D863D208142F35 [36mheight=[0m68 [36mmodule=[0mconsensus [36mnum_txs=[0m0 [36mroot=[0mD620EB4CD3679B2D6A2EE32052EC04CE229F5907951764FE5A418D70026D3DDD
+[90m2:53AM[0m [32mINF[0m [1mfinalized block[0m [36mblock_app_hash=[0m0E61E97F2F7485ACC2830A6AE7D8869F60C8B2FDE9B9134936994954646B2962 [36mheight=[0m68 [36mmodule=[0mstate [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m0
+[90m2:53AM[0m [32mINF[0m [1mexecuted block[0m [36mapp_hash=[0m0E61E97F2F7485ACC2830A6AE7D8869F60C8B2FDE9B9134936994954646B2962 [36mheight=[0m68 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mcommitted state[0m [36mblock_app_hash=[0mD620EB4CD3679B2D6A2EE32052EC04CE229F5907951764FE5A418D70026D3DDD [36mheight=[0m68 [36mmodule=[0mstate
+[90m2:53AM[0m [32mINF[0m [1mindexed block events[0m [36mheight=[0m68 [36mmodule=[0mtxindex
+[90m2:53AM[0m [32mINF[0m [1mstopping gRPC server...[0m [36maddress=[0mlocalhost:9090 [36mmodule=[0mgrpc-server
+[90m2:53AM[0m [32mINF[0m [1mcaught signal[0m [36mmodule=[0mserver [36msignal=[0mterminated
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mNode [36mmodule=[0mserver [36mmsg=[0m"Stopping Node service"
+[90m2:53AM[0m [32mINF[0m [1mStopping Node[0m [36mmodule=[0mserver
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mEventBus [36mmodule=[0mevents [36mmsg=[0m"Stopping EventBus service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mPubSub [36mmodule=[0mpubsub [36mmsg=[0m"Stopping PubSub service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mIndexerService [36mmodule=[0mtxindex [36mmsg=[0m"Stopping IndexerService service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0m"P2P Switch" [36mmodule=[0mp2p [36mmsg=[0m"Stopping P2P Switch service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mConsensusReactor [36mmodule=[0mconsensus [36mmsg=[0m"Stopping Consensus service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mConsensusState [36mmodule=[0mconsensus [36mmsg=[0m"Stopping State service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mTimeoutTicker [36mmodule=[0mconsensus [36mmsg=[0m"Stopping TimeoutTicker service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mbaseWAL [36mmodule=[0mconsensus [36mmsg=[0m"Stopping baseWAL service" [36mwal=[0mmytestnet/data/cs.wal/wal
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mGroup [36mmodule=[0mconsensus [36mmsg=[0m"Stopping Group service" [36mwal=[0mmytestnet/data/cs.wal/wal
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mEvidence [36mmodule=[0mevidence [36mmsg=[0m"Stopping Evidence service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mStateSync [36mmodule=[0mstatesync [36mmsg=[0m"Stopping StateSync service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mPEX [36mmodule=[0mpex [36mmsg=[0m"Stopping PEX service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mbook=[0mmytestnet/config/addrbook.json [36mimpl=[0mAddrBook [36mmodule=[0mp2p [36mmsg=[0m"Stopping AddrBook service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mMempool [36mmodule=[0mmempool [36mmsg=[0m"Stopping Mempool service"
+[90m2:53AM[0m [32mINF[0m [1mservice stop[0m [36mimpl=[0mReactor [36mmodule=[0mblocksync [36mmsg=[0m"Stopping Reactor service"
+[90m2:53AM[0m [32mINF[0m [1mSaving AddrBook to file[0m [36mbook=[0mmytestnet/config/addrbook.json [36mmodule=[0mp2p [36msize=[0m0
+[90m2:53AM[0m [31mERR[0m [1mStopped accept routine, as transport is closed[0m [36mmodule=[0mp2p [36mnumPeers=[0m0
+[90m2:53AM[0m [32mINF[0m [1mClosing rpc listener[0m [36mlistener=[0m{"Listener":{}} [36mmodule=[0mserver
+[90m2:53AM[0m [32mINF[0m [1mRPC HTTP server stopped[0m [36merr=[0m"accept tcp [::]:26657: use of closed network connection" [36mmodule=[0mrpc-server
+[90m2:53AM[0m [31mERR[0m [1mError serving server[0m [36merr=[0m"accept tcp [::]:26657: use of closed network connection" [36mmodule=[0mserver
+[90m2:53AM[0m [32mINF[0m [1mClosing blockstore[0m [36mmodule=[0mserver
+[90m2:53AM[0m [32mINF[0m [1mClosing statestore[0m [36mmodule=[0mserver
+[90m2:53AM[0m [32mINF[0m [1mClosing evidencestore[0m [36mmodule=[0mserver
+[90m2:53AM[0m [32mINF[0m [1mClosing application.db[0m [36mmodule=[0mserver
+[90m2:53AM[0m [32mINF[0m [1mClosing snapshots/metadata.db[0m [36mmodule=[0mserver

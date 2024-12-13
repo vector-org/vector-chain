@@ -328,6 +328,14 @@ test-tokenfactory:
 	@echo "Running tokenfactory test"
 	@./scripts/tests/tokenfactory/tokenfactory.sh
 
+
+test-upgrade:
+	@echo "Running upgrade test"
+	@./scripts/upgrade_test.sh
+
+
+script-tests: init-test-framework test-tokenfactory clean-testing-data
+
 clean-testing-data:
 	@echo "Killing $(BINARY) and removing previous data"
 	-@pkill $(BINARY) 2>/dev/null
