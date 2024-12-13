@@ -21,8 +21,8 @@ import (
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
-	"github.com/vector-org/vector/app"
-	"github.com/vector-org/vector/app/params"
+	"github.com/vector-org/vector-chain/app"
+	"github.com/vector-org/vector-chain/app/params"
 )
 
 // NewRootCmd creates a new root command for chain app. It is called once in the

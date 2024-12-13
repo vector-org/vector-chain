@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/vector-org/vector/app"
+	"github.com/vector-org/vector-chain/app"
 
 	"cosmossdk.io/log"
 	confixcmd "cosmossdk.io/tools/confix/cmd"

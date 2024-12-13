@@ -1,4 +1,4 @@
-module github.com/vector-org/vector/interchaintest
+module github.com/vector-org/vector-chain/interchaintest
 
 go 1.22.3
 

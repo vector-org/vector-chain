@@ -5,8 +5,8 @@ import (
 
 	upgradetypes "cosmossdk.io/x/upgrade/types"
 
-	"github.com/vector-org/vector/app/upgrades"
-	"github.com/vector-org/vector/app/upgrades/noop"
+	"github.com/vector-org/vector-chain/app/upgrades"
+	"github.com/vector-org/vector-chain/app/upgrades/noop"
 )
 
 // Upgrades list of chain upgrades
