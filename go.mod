@@ -1,6 +1,6 @@
 module github.com/vector-org/vector-chain
 
-go 1.22.9
+go 1.23.4
 
 replace (
 	cosmossdk.io/core => cosmossdk.io/core v0.11.0

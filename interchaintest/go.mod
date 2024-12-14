@@ -1,6 +1,6 @@
 module github.com/vector-org/vector-chain/interchaintest
 
-go 1.22.3
+go 1.23.4
 
 replace (
 	// not tagged properly (SDK v51)
