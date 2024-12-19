@@ -1,3 +1,7 @@
 configs/logs.json
 dist/
 build/
+mytestnet
+data/
+_build/
+screenlog.0
