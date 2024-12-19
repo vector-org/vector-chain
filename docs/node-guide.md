@@ -12,7 +12,8 @@ This guide walks you through the process of joining the `vector-chain` network. 
    - [Configure as a Validator](#configure-as-a-validator)
    - [Configure as an Archive Node](#configure-as-an-archive-node)
    - [Configure as a Public Node](#configure-as-a-public-node)
-4. [Join the Network](#5-join-the-network)
+4. [Join the Network](#4-join-the-network)
+5. [Docker Setup](#5-docker-setup)
 
 ---
 
@@ -160,3 +161,33 @@ To participate, your node must be synchronized with the latest block height. The
 - **State Sync**: Quickly fetch the current network state from peers, suitable for validators and public nodes that need rapid startup.
 
 Choose the method that best fits your operational goals, hardware constraints, and bandwidth. Most validators and public nodes find snapshots or state sync preferable for faster, more efficient network integration.
+
+## 5. Docker Setup
+
+Build the docker image:
+
+```bash
+docker build -t validator .
+```
+
+Initialize the node:
+
+```bash
+docker run --rm \
+ --name validator_init \
+ -v /srv/validator:/root/.vector/ \
+ validator \
+ vectord init $VECTOR_MONIKER
+```
+
+Start the node:
+
+```bash
+docker run -d \
+ --name validator \
+ --restart unless-stopped \
+ -v /srv/validator:/root/.vector/ \
+ -p 26660:26660 \
+ validator \
+ vectord start
+```
