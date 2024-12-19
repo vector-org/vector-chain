@@ -11,6 +11,7 @@ Welcome to the **Vector Chain Genesis Guide**. This comprehensive guide will wal
 3. [Initialize Validator](#initialize-validator)
 4. [Add Mnemonic to Validator](#add-mnemonic-to-validator)
 5. [Generate Genesis Transaction](#generate-genesis-transaction)
+6. [Docker Setup](#docker-setup)
 
 ---
 
@@ -157,3 +158,73 @@ Please take your genesis transaction and submit it to GitHub!
 
 > [!TIP]
 > Use Grafana for monitoring and alerting, Prometheus for metric scraping, and Loki for logging
+
+## Docker Setup
+
+Build the docker image:
+
+```bash
+docker build -t validator .
+```
+
+Initialize the node:
+
+```bash
+docker run --rm \
+ --name validator_init \
+ -v /srv/validator:/root/.vector/ \
+ validator \
+ vectord init $VECTOR_MONIKER
+```
+
+Add key:
+
+```bash
+docker run --rm -it\
+ --name validator_keys_add \
+ -v /srv/validator:/root/.vector/ \
+ validator \
+ vectord keys add $VECTOR_KEY_NAME
+```
+
+Verify keys have been added:
+
+```bash
+docker run --rm -it\
+ --name validator_keys_list \
+ -v /srv/validator:/root/.vector/ \
+ validator \
+ vectord keys list
+```
+
+Create account:
+
+```bash
+docker run --rm -it \
+ --name validator_genesis_add_genesis_account \
+ -v /srv/validator:/root/.vector/ \
+ validator \
+ vectord genesis add-genesis-account $VECTOR_KEY_NAME 10000000uvctr
+```
+
+Create genesis transaction:
+
+```bash
+docker run --rm -it \
+ --name validator_genesis_gentx \
+ -v /srv/validator:/root/.vector/ \
+ validator \
+ vectord genesis gentx $VECTOR_KEY_NAME 1000000uvctr --chain-id vector-1
+```
+
+Start the node:
+
+```bash
+docker run -d \
+ --name validator \
+ --restart unless-stopped \
+ -v /srv/validator:/root/.vector/ \
+ -p 26660:26660 \
+ validator \
+ vectord start
+```
