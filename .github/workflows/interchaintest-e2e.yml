@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build-docker:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - id: go-cache-paths
         run: |
