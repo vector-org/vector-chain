@@ -32,19 +32,14 @@ RUN LEDGER_ENABLED=false BUILD_TAGS=muslc LINK_STATICALLY=true make build \
 # --------------------------------------------------------
 FROM alpine:3.16
 
+COPY --from=go-builder /code/build/vectord /usr/bin/vectord
+
 # Install dependencies used for Starship
 RUN apk add --no-cache curl make bash jq sed
 
-#add user vector
-RUN addgroup vector && adduser -S -h /home/vector -s /bin/bash -G vector vector
-
-# Switch to user vector
-USER vector
-WORKDIR /home/vector
-
-COPY --from=go-builder --chown=vector:vector /code/build/vectord /home/vector/bin/vectord
+WORKDIR /opt
 
 # rest server, tendermint p2p, tendermint rpc
 EXPOSE 1317 26656 26657
 
-CMD ["/home/vector/bin/vectord", "version"]
+CMD ["/usr/bin/vectord", "version"]
