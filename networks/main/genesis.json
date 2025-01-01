@@ -1,7 +1,7 @@
 {
   "app_name": "vectord",
   "app_version": "2.0.0-41-g832c3df",
-  "genesis_time": "2025-01-06T15:00:00Z",
+  "genesis_time": "2025-01-01T18:00:00Z",
   "chain_id": "vector-1",
   "initial_height": 1,
   "app_hash": null,
@@ -33,9 +33,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -54,9 +54,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -75,9 +75,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -96,9 +96,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -117,9 +117,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -138,9 +138,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -159,9 +159,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -180,9 +180,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -201,9 +201,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -222,9 +222,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -243,9 +243,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -264,9 +264,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -285,9 +285,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -306,9 +306,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -327,9 +327,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -348,9 +348,9 @@
             ],
             "delegated_free": [],
             "delegated_vesting": [],
-            "end_time": "1780758000"
+            "end_time": "1780336800"
           },
-          "start_time": "1749222000"
+          "start_time": "1748800800"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -371,7 +371,7 @@
             "delegated_vesting": [],
             "end_time": "1767139200"
           },
-          "start_time": "1736175600"
+          "start_time": "1735754400"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -392,7 +392,7 @@
             "delegated_vesting": [],
             "end_time": "1767139200"
           },
-          "start_time": "1736175600"
+          "start_time": "1735754400"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -413,7 +413,7 @@
             "delegated_vesting": [],
             "end_time": "1767139200"
           },
-          "start_time": "1736175600"
+          "start_time": "1735754400"
         },
         {
           "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
@@ -434,7 +434,7 @@
             "delegated_vesting": [],
             "end_time": "1767139200"
           },
-          "start_time": "1736175600"
+          "start_time": "1735754400"
         }
       ]
     },
