@@ -1,6 +1,6 @@
 # Vector Chain Node Guide
 
-This guide walks you through the process of joining the `vector-chain` network. Whether you aim to participate as a Validator, run an Archive node for historical data, or operate a Public node to support the network, the following steps will guide you through installation, configuration, and startup.
+This guide walks you through the process of joining the `vector-chain` network. Whether you aim to participate as a Validator, run an Archive node for historical data, operate a Public node to support the network, or run a simple node as part of the network, the following steps will guide you through installation, configuration, and startup.
 
 ---
 
@@ -12,6 +12,7 @@ This guide walks you through the process of joining the `vector-chain` network. 
    - [Configure as a Validator](#configure-as-a-validator)
    - [Configure as an Archive Node](#configure-as-an-archive-node)
    - [Configure as a Public Node](#configure-as-a-public-node)
+   - [Configure as a Non-Validator Node](#configure-as-a-non-validator-node)
 4. [Join the Network](#4-join-the-network)
 5. [Docker Setup](#5-docker-setup)
 
@@ -77,13 +78,13 @@ Check that the directories exist:
 ls $VECTOR_HOME
 ```
 
-Backup node_key.json and priv_validator_key.json.
+Backup `node_key.json` and `priv_validator_key.json`.
 
 ---
 
 ## 3. Configure Node Type
 
-All configuration files are located in $VECTOR_HOME/config/. Adjust them according to the node type you are running.
+All configuration files are located in `$VECTOR_HOME/config/`. Adjust them according to the node type you are running.
 
 ### Configure as a Validator
 
@@ -108,7 +109,7 @@ You need a key to sign blocks and transactions:
 vectord keys add $VECTOR_KEY_NAME --home $VECTOR_HOME
 ```
 
-Use --recover if you have an existing mnemonic. Confirm your key:
+Use `--recover` if you have an existing mnemonic. Confirm your key:
 
 ```bash
 vectord keys list --home $VECTOR_HOME
@@ -138,7 +139,7 @@ vectord tx staking create-validator \
 
 ### Configure as an Archive Node
 
-Archive nodes store full chain history. In $VECTOR_HOME/config/app.toml, set:
+Archive nodes store full chain history. In `$VECTOR_HOME/config/app.toml`, set:
 
 ```toml
 pruning = "nothing"
@@ -149,6 +150,16 @@ Ensure sufficient disk space and resources as the chain grows.
 ### Configure as a Public Node
 
 Public nodes provide RPC, API, and gRPC endpoints. If running a public node, expose these services securely by opening appropriate ports, using rate limits, reverse proxies, and firewalls. Adjust pruning to manage disk usage as needed.
+
+### Configure as a Non-Validator Node
+
+Non-validator nodes are part of the network but do not participate in block production. To optimize disk usage, set the following in `$VECTOR_HOME/config/app.toml`:
+
+```toml
+pruning = "everything"
+```
+
+This ensures minimal storage requirements, as no historical data is kept.
 
 ---
 
@@ -161,6 +172,14 @@ To participate, your node must be synchronized with the latest block height. The
 - **State Sync**: Quickly fetch the current network state from peers, suitable for validators and public nodes that need rapid startup.
 
 Choose the method that best fits your operational goals, hardware constraints, and bandwidth. Most validators and public nodes find snapshots or state sync preferable for faster, more efficient network integration.
+
+After synchronization, start your node with the following command:
+
+```bash
+vectord start
+```
+
+---
 
 ## 5. Docker Setup
 
