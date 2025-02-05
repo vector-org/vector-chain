@@ -15,7 +15,7 @@ HOME=mytestnet
 ROOT=$(pwd)
 DENOM=uvctr
 CHAIN_ID=localchain-1
-SOFTWARE_UPGRADE_NAME="v0.2.0"
+SOFTWARE_UPGRADE_NAME="v2.0.0"
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 
@@ -116,7 +116,7 @@ run_upgrade () {
     "messages": [
         {
             "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
-            "authority": "vector10d07y265gmmuvt4z0w9aw880jnsr700j53vrug",
+            "authority": "vector10d07y265gmmuvt4z0w9aw880jnsr700j65d973",
             "plan": {
                 "name": "$SOFTWARE_UPGRADE_NAME",
                 "time": "0001-01-01T00:00:00Z",
@@ -183,7 +183,7 @@ EOF
 
     # determine block_height to halt
     while true; do
-        BLOCK_HEIGHT=$(./_build/old/vectord status | jq '.SyncInfo.latest_block_height' -r)
+        BLOCK_HEIGHT=$(./_build/old/vectord status | jq '.sync_info.latest_block_height' -r)
         if [ $BLOCK_HEIGHT = "$UPGRADE_HEIGHT" ]; then
             # assuming running only 1 vectord
             echo "BLOCK HEIGHT = $UPGRADE_HEIGHT REACHED, KILLING OLD ONE"

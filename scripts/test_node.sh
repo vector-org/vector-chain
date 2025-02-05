@@ -20,7 +20,7 @@ export GRPC=${GRPC:-"9090"}
 export GRPC_WEB=${GRPC_WEB:-"9091"}
 export PROFF_LADDER=${PROFF_LADDER:-"6060"}
 export ROSETTA=${ROSETTA:-"8080"}
-export BLOCK_TIME=${BLOCK_TIME:-"1s"}
+export BLOCK_TIME=${BLOCK_TIME:-"2s"}
 
 # Ensure binary exists
 if [ -z `which $BINARY` ]; then
@@ -118,6 +118,14 @@ sed -i.bak -e "s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:${RP
 sed -i.bak -e "s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${P2P}\"%" $HOME_DIR/config/config.toml
 sed -i.bak -e "s%^timeout_commit = \"5s\"%timeout_commit = \"${BLOCK_TIME}\"%" $HOME_DIR/config/config.toml
 sed -i.bak -e 's%^cors_allowed_origins = \[\]%cors_allowed_origins = \["*"\]%' $HOME_DIR/config/config.toml
+
+# enable rest server and swagger
+sed -i.bak 's/enable = false/enable = true/' $HOME_DIR/config/app.toml
+sed -i.bak 's/swagger = false/swagger = true/' $HOME_DIR/config/app.toml
+sed -i.bak -e 's/enabled-unsafe-cors = false/enabled-unsafe-cors = true/g' $HOME_DIR/config/app.toml
+sed -i.bak 's/minimum-gas-prices = "1uvctr"/minimum-gas-prices = "0.0uvctr"/' $HOME_DIR/config/app.toml
+
+
 
 # Start the node
 $BINARY start --home $HOME_DIR \
