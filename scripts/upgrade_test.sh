@@ -210,9 +210,9 @@ sleep 1
 # run new node
 echo -e "\n\n=> =>continue running nodes after upgrade"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    CONTINUE="true" screen -L -dmS node1 bash scripts/run-node.sh _build/new/vectord $DENOM
+    CONTINUE="true" screen -L -dmS node1 bash scripts/test_node.sh _build/new/vectord $DENOM
 else
-    CONTINUE="true" screen -L -dmS node1 bash scripts/run-node.sh _build/new/vectord $DENOM
+    CONTINUE="true" screen -L -dmS node1 bash scripts/test_node.sh _build/new/vectord $DENOM
 fi
 
 sleep 5

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BINARY=$1
 export KEY="acc0"
 export KEY2="acc1"
 
