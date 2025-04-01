@@ -1,6 +1,7 @@
 module github.com/vector-org/vector
 
 go 1.22.9
+toolchain go1.24.1
 
 replace (
 	cosmossdk.io/core => cosmossdk.io/core v0.11.0
@@ -47,7 +48,7 @@ require (
 	github.com/spf13/viper v1.19.0
 	github.com/strangelove-ventures/tokenfactory v0.50.4-wasmvm2
 	github.com/stretchr/testify v1.10.0
-	google.golang.org/protobuf v1.35.2
+	google.golang.org/protobuf v1.36.6
 )
 
 require (
