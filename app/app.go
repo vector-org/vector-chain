@@ -182,9 +182,9 @@ import (
 const (
 	appName      = "vectorchain"
 	NodeDir      = ".vectorchain"
-	Bech32Prefix = "cosmos"
+	Bech32Prefix = "vector"
 
-	ChainID = "localchain_9000-1"
+	ChainID = "scalar_1337-2"
 )
 
 var (
@@ -215,7 +215,7 @@ var (
 	BaseDenomUnit int64 = 18
 
 	BaseDenom    = "uvctr"
-	DisplayDenom = "MY_DENOM_DISPLAY"
+	DisplayDenom = "VCTR"
 
 	// Bech32PrefixAccAddr defines the Bech32 prefix of an account's address
 	Bech32PrefixAccAddr = Bech32Prefix
