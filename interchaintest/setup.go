@@ -33,7 +33,7 @@ var (
 
 	ChainID = "localchain_9000-1"
 	Binary  = "vectord"
-	Bech32  = "cosmos"
+	Bech32  = "vector"
 	ibcPath = "ibc-path"
 
 	NumberVals         = 1
