@@ -118,5 +118,5 @@ if [ $err -ne 0 ]; then
 fi
 
 echo "Keys and gentx setup completed successfully!"
-echo "Key 1 ($KEY): cosmos140fehngcrxvhdt84x729p3f0qmkmea8nt2uzux"
-echo "Key 2 ($KEY2): cosmos1r6yue0vuyj9m7xw78npspt9drq2tmtvg8h6r0d"
+echo "Key 1 ($KEY): vector140fehngcrxvhdt84x729p3f0qmkmea8nt2uzux"
+echo "Key 2 ($KEY2): vector1r6yue0vuyj9m7xw78npspt9drq2tmtvg8h6r0d"

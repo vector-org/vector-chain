@@ -1,9 +1,4 @@
 #!/bin/bash
-# Run this script to quickly install, setup, and run the current version of the network without docker.
-#
-# Examples:
-# CHAIN_ID="localchain_9000-1" CHAIN_DIR="~/.vectorchain" BLOCK_TIME="1000ms" CLEAN=true sh scripts/test_node.sh
-# CHAIN_ID="localchain_9000-2" CHAIN_DIR="~/.vectorchain" CLEAN=true RPC=36657 REST=2317 PROFF=6061 P2P=36656 GRPC=8090 GRPC_WEB=8091 ROSETTA=8081 BLOCK_TIME="500ms" sh scripts/test_node.sh
 
 set -eu
 
@@ -81,9 +76,10 @@ from_scratch () {
     echo $mnemonic | $BINARY keys add $key --keyring-backend $KEYRING --algo $KEYALGO --home $CHAIN_DIR --recover
   }
 
-  # cosmos140fehngcrxvhdt84x729p3f0qmkmea8nt2uzux
+  # vector140fehngcrxvhdt84x729p3f0qmkmea8nt2uzux
   add_key $KEY "decorate bright ozone fork gallery riot bus exhaust worth way bone indoor calm squirrel merry zero scheme cotton until shop any excess stage laundry"
-  # cosmos1r6yue0vuyj9m7xw78npspt9drq2tmtvg8h6r0d
+  
+  # vector1r6yue0vuyj9m7xw78npspt9drq2tmtvg8h6r0d
   add_key $KEY2 "wealth flavor believe regret funny network recall kiss grape useless pepper cram hint member few certain unveil rather brick bargain curious require crowd raise"
 
   $BINARY init $MONIKER --chain-id $CHAIN_ID --default-denom $DENOM --home $CHAIN_DIR
@@ -105,7 +101,7 @@ from_scratch () {
   update_test_genesis `printf '.app_state["evm"]["params"]["evm_denom"]="%s"' $DENOM`
   update_test_genesis '.app_state["evm"]["params"]["chain_config"]["chain_id"]="1337"'
   update_test_genesis '.app_state["evm"]["params"]["chain_config"]["denom"]="'$DENOM'"'
-  # update_test_genesis '.app_state["evm"]["params"]["chain_config"]["decimals"]="18"'
+  update_test_genesis '.app_state["evm"]["params"]["chain_config"]["decimals"]="18"'
 
   # EVM
   update_test_genesis '.app_state["evm"]["params"]["active_static_precompiles"]=["0x0000000000000000000000000000000000000100","0x0000000000000000000000000000000000000400","0x0000000000000000000000000000000000000800","0x0000000000000000000000000000000000000801","0x0000000000000000000000000000000000000802","0x0000000000000000000000000000000000000803","0x0000000000000000000000000000000000000804","0x0000000000000000000000000000000000000805"]'
@@ -116,6 +112,7 @@ from_scratch () {
   update_test_genesis '.app_state["feemarket"]["params"]["base_fee_change_denominator"]=8'
   update_test_genesis '.app_state["feemarket"]["params"]["elasticity_multiplier"]=2'
   update_test_genesis '.app_state["feemarket"]["params"]["enable_height"]="0"'
+  
   update_test_genesis '.app_state["feemarket"]["params"]["base_fee"]="0.010000000000000000"'
   update_test_genesis '.app_state["feemarket"]["params"]["min_gas_price"]="0.010000000000000000"'
   update_test_genesis '.app_state["feemarket"]["params"]["min_gas_multiplier"]="0.500000000000000000"'
