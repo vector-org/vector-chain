@@ -198,6 +198,10 @@ sed -i -e 's/enabled-unsafe-cors = false/enabled-unsafe-cors = true/g' $CHAIN_DI
 sed -i -e 's/address = "127.0.0.1:8545"/address = "0.0.0.0:8545"/g' $CHAIN_DIR/config/app.toml
 sed -i -e 's/ws-address = "127.0.0.1:8546"/ws-address = "0.0.0.0:8546"/g' $CHAIN_DIR/config/app.toml
 sed -i -e 's/api = "eth,net,web3"/api = "eth,txpool,personal,net,debug,web3"/g' $CHAIN_DIR/config/app.toml
+sed -i -e 's/enable-indexer = false/enable-indexer = true/g' $CHAIN_DIR/config/app.toml
+
+# Set query gas limit to 10M
+sed -i -e 's/query-gas-limit = "0"/query-gas-limit = "10000000"/g' $CHAIN_DIR/config/app.toml
 
 # peer exchange
 sed -i -e 's/pprof_laddr = "localhost:6060"/pprof_laddr = "localhost:'$PROFF'"/g' $CHAIN_DIR/config/config.toml
