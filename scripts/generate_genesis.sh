@@ -125,7 +125,7 @@ from_scratch () {
   update_test_genesis '.app_state["interchainaccounts"]["controller_genesis_state"]["params"]["controller_enabled"]=false'
   update_test_genesis '.app_state["interchainaccounts"]["host_genesis_state"]["params"]["host_enabled"]=false'
 
-
+  
   # staking
   update_test_genesis `printf '.app_state["staking"]["params"]["bond_denom"]="%s"' $DENOM`
   update_test_genesis '.app_state["staking"]["params"]["min_commission_rate"]="0.050000000000000000"'
@@ -133,6 +133,13 @@ from_scratch () {
   # mint
   update_test_genesis `printf '.app_state["mint"]["params"]["mint_denom"]="%s"' $DENOM`
 
+  # mint parameters
+  update_test_genesis '.app_state["mint"]["params"]["inflation_rate_change"]="0.000000000000000000"'
+  update_test_genesis '.app_state["mint"]["params"]["inflation_max"]="0.000000000000000000"'
+  update_test_genesis '.app_state["mint"]["params"]["inflation_min"]="0.000000000000000000"'
+  update_test_genesis '.app_state["mint"]["params"]["goal_bonded"]="0.670000000000000000"'
+  update_test_genesis '.app_state["mint"]["params"]["blocks_per_year"]="6311520"'
+  
   # crisis
   update_test_genesis `printf '.app_state["crisis"]["constant_fee"]={"denom":"%s","amount":"1000"}' $DENOM`
 
