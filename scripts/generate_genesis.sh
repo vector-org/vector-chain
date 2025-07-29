@@ -124,7 +124,7 @@ from_scratch () {
   # Disable IBC modules
   update_test_genesis '.app_state["interchainaccounts"]["controller_genesis_state"]["params"]["controller_enabled"]=false'
   update_test_genesis '.app_state["interchainaccounts"]["host_genesis_state"]["params"]["host_enabled"]=false'
-
+  update_test_genesis '.app_state["interchainaccounts"]["host_genesis_state"]["params"]["allow_messages"]=[]'
   
   # staking
   update_test_genesis `printf '.app_state["staking"]["params"]["bond_denom"]="%s"' $DENOM`
