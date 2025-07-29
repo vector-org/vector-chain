@@ -10,8 +10,8 @@ replace (
 	cosmossdk.io/store => github.com/evmos/cosmos-sdk/store v0.0.0-20240718141609-414cbd051fbe
 	github.com/CosmWasm/wasmd => github.com/rollchains/wasmd v0.50.0-evm
 
-	github.com/cosmos/cosmos-sdk => github.com/strangelove-ventures/cosmos-sdk v0.0.0-20250317212103-0767f8c5b1e5
-	github.com/cosmos/evm => github.com/strangelove-ventures/cosmos-evm v0.1.5
+	// github.com/cosmos/cosmos-sdk => github.com/strangelove-ventures/cosmos-sdk v0.0.0-20250317212103-0767f8c5b1e5
+	// github.com/cosmos/evm => github.com/strangelove-ventures/cosmos-evm v0.1.5
 	github.com/ethereum/go-ethereum => github.com/evmos/go-ethereum v1.10.26-evmos-rc4
 	github.com/spf13/viper => github.com/spf13/viper v1.17.0 // v1.18+ breaks app overrides
 )
