@@ -129,6 +129,10 @@ from_scratch () {
   # staking
   update_test_genesis `printf '.app_state["staking"]["params"]["bond_denom"]="%s"' $DENOM`
   update_test_genesis '.app_state["staking"]["params"]["min_commission_rate"]="0.050000000000000000"'
+  update_test_genesis '.app_state["staking"]["params"]["unbonding_time"]="300s"'
+
+  # slashing
+  update_test_genesis '.app_state["slashing"]["params"]["signed_blocks_window"]="28800"'
 
   # mint
   update_test_genesis `printf '.app_state["mint"]["params"]["mint_denom"]="%s"' $DENOM`
