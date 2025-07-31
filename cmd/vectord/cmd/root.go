@@ -17,6 +17,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/spf13/cobra"
 
+	// EVM server flags
+	srvflags "github.com/cosmos/evm/server/flags"
+
 	"vector/app"
 )
 
@@ -83,6 +86,11 @@ func NewRootCmd() *cobra.Command {
 	}
 
 	initRootCmd(rootCmd, clientCtx.TxConfig, moduleBasicManager)
+
+	// Add EVM-specific CLI flags manually
+	rootCmd.PersistentFlags().String(srvflags.EVMTracer, "", "EVM tracer type to collect execution traces from the EVM transaction execution (json|struct|access_list|markdown)")
+	rootCmd.PersistentFlags().Uint64(srvflags.EVMMaxTxGasWanted, 500000, "Maximum gas wanted per tx")
+	rootCmd.PersistentFlags().Bool(srvflags.EVMEnablePreimageRecording, false, "Enable EVM preimage recording")
 
 	if err := autoCliOpts.EnhanceRootCommand(rootCmd); err != nil {
 		panic(err)
