@@ -89,6 +89,7 @@ var (
 		"mantra-1":            5888, // mainnet Chain ID
 		"mantra-dukong-1":     5887, // testnet Chain ID
 		"mantra-canary-net-1": 5887, // devnet Chain ID
+		"9001":                9001, // local testnet Chain ID
 	}
 
 	MANTRAChainID uint64 = 262144 // default Chain ID
@@ -180,12 +181,29 @@ func (app *App) setupEVM() error {
 	}
 
 	chainID := app.ChainID()
-	from := strings.LastIndexByte(chainID, '_')
-	to := strings.LastIndexByte(chainID, '-')
+	var evmChainID uint64
+	var err error
 
-	evmChainID, err := strconv.ParseUint(chainID[from+1:to], 10, 64)
-	if err != nil {
-		return fmt.Errorf("can't parse evm chain id from %s: %w", chainID, err)
+	// Try to parse chain ID directly as uint64 first (for simple numeric chain IDs like "9001")
+	if evmChainID, err = strconv.ParseUint(chainID, 10, 64); err != nil {
+		// If direct parsing fails, try to extract from formatted chain ID (e.g., "cosmos_1234-1")
+		from := strings.LastIndexByte(chainID, '_')
+		to := strings.LastIndexByte(chainID, '-')
+
+		if from == -1 || to == -1 || from >= to {
+			// If we can't parse it either way, check the EVMChainIDMap
+			if mappedChainID, found := EVMChainIDMap[chainID]; found {
+				evmChainID = mappedChainID
+			} else {
+				// Fall back to default chain ID
+				evmChainID = MANTRAChainID
+			}
+		} else {
+			evmChainID, err = strconv.ParseUint(chainID[from+1:to], 10, 64)
+			if err != nil {
+				return fmt.Errorf("can't parse evm chain id from %s: %w", chainID, err)
+			}
+		}
 	}
 
 	eip712.SetEncodingConfig(app.legacyAmino, app.interfaceRegistry, evmChainID)
@@ -197,6 +215,7 @@ func (app *App) setupEVM() error {
 
 	ethCfg := evmtypes.DefaultChainConfig(evmChainID)
 	if err := evmtypes.NewEVMConfigurator().
+		WithExtendedEips(cosmosEVMActivators).
 		WithChainConfig(ethCfg).
 		WithEVMCoinInfo(ChainCoinInfo).
 		Configure(); err != nil {

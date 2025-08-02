@@ -21,7 +21,6 @@ import (
 	"github.com/spf13/cobra"
 
 	// EVM server flags
-	srvflags "github.com/cosmos/evm/server/flags"
 
 	"vector/app"
 )
@@ -71,6 +70,7 @@ func NewRootCmd() *cobra.Command {
 
 			// This needs to go after ReadFromClientConfig, as that function
 			// sets the RPC client needed for SIGN_MODE_TEXTUAL.
+
 			txConfigOpts.EnabledSignModes = append(txConfigOpts.EnabledSignModes, signing.SignMode_SIGN_MODE_TEXTUAL)
 			txConfigOpts.TextualCoinMetadataQueryFn = txmodule.NewGRPCCoinMetadataQueryFn(clientCtx)
 			txConfigWithTextual, err := tx.NewTxConfigWithOptions(
@@ -105,10 +105,10 @@ func NewRootCmd() *cobra.Command {
 
 	initRootCmd(rootCmd, clientCtx.TxConfig, moduleBasicManager)
 
-	// Add EVM-specific CLI flags manually
-	rootCmd.PersistentFlags().String(srvflags.EVMTracer, "", "EVM tracer type to collect execution traces from the EVM transaction execution (json|struct|access_list|markdown)")
-	rootCmd.PersistentFlags().Uint64(srvflags.EVMMaxTxGasWanted, 500000, "Maximum gas wanted per tx")
-	rootCmd.PersistentFlags().Bool(srvflags.EVMEnablePreimageRecording, false, "Enable EVM preimage recording")
+	// // Add EVM-specific CLI flags manually
+	// rootCmd.PersistentFlags().String(srvflags.EVMTracer, "", "EVM tracer type to collect execution traces from the EVM transaction execution (json|struct|access_list|markdown)")
+	// rootCmd.PersistentFlags().Uint64(srvflags.EVMMaxTxGasWanted, 500000, "Maximum gas wanted per tx")
+	// rootCmd.PersistentFlags().Bool(srvflags.EVMEnablePreimageRecording, false, "Enable EVM preimage recording")
 
 	if err := autoCliOpts.EnhanceRootCommand(rootCmd); err != nil {
 		panic(err)

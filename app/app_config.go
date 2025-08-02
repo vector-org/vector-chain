@@ -121,10 +121,11 @@ var (
 	// NOTE: The genutils module must occur after staking so that pools are
 	// properly initialized with tokens from genesis accounts.
 	// NOTE: The genutils module must also occur after auth so that it can access the params from auth.
-	// NOTE: wasm module should be at the end as it can call other module functionality direct or via message dispatching during
-	// genesis phase. For example bank transfer, auth account check, staking, ...
+	// NOTE: feemarket module needs to be initialized before genutil module:
+	// gentx transactions use MinGasPriceDecorator.AnteHandle
 	genesisModuleOrder = []string{
-		// cosmos-sdk/ibc modules
+		// cosmos-sdk modules
+		consensustypes.ModuleName,
 		authtypes.ModuleName,
 		banktypes.ModuleName,
 		distrtypes.ModuleName,
@@ -132,79 +133,52 @@ var (
 		slashingtypes.ModuleName,
 		govtypes.ModuleName,
 		minttypes.ModuleName,
-		ibcexported.ModuleName,
-		// evm modules
-		evmtypes.ModuleName,
-		// NOTE: feemarket module needs to be initialized before genutil module:
-		// gentx transactions use MinGasPriceDecorator.AnteHandle
-		feemarkettypes.ModuleName,
-		erc20types.ModuleName,
-		precisebanktypes.ModuleName,
-
-		genutiltypes.ModuleName,
 		evidencetypes.ModuleName,
 		authz.ModuleName,
-		ibctransfertypes.ModuleName,
-		icatypes.ModuleName,
 		feegrant.ModuleName,
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
 		circuittypes.ModuleName,
 		group.ModuleName,
-		consensustypes.ModuleName,
-		circuittypes.ModuleName,
-		vectormoduletypes.ModuleName,
-		// chain modules
-		// wardenmoduletypes.ModuleName,
-		// actmoduletypes.ModuleName,
-		// asyncmoduletypes.ModuleName,
-		// schedmoduletypes.ModuleName,
-		// // wasm module
-		// wasmtypes.ModuleName,
-		// // slinky modules
-		// oracletypes.ModuleName,
-		// // market map genesis must be called AFTER all consuming modules (i.e. x/oracle, etc.)
-		// marketmaptypes.ModuleName,
-
 		epochstypes.ModuleName,
+		// evm modules BEFORE genutil
+		evmtypes.ModuleName,
+		feemarkettypes.ModuleName,
+		erc20types.ModuleName,
+		precisebanktypes.ModuleName,
+		// genutil AFTER evm modules
+		genutiltypes.ModuleName,
+		// ibc modules AFTER evm
+		ibcexported.ModuleName,
+		ibctransfertypes.ModuleName,
+		icatypes.ModuleName,
+		// custom modules
+		vectormoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
 	beginBlockers = []string{
+		upgradetypes.ModuleName,
 		minttypes.ModuleName,
-
-		// ibc modules
-		ibcexported.ModuleName,
-		ibctransfertypes.ModuleName,
-		icatypes.ModuleName,
-		// wasmtypes.ModuleName,
-
-		// evm modules
-		erc20types.ModuleName,
-		feemarkettypes.ModuleName,
-		evmtypes.ModuleName,
-
-		// cosmos sdk modules
-
 		distrtypes.ModuleName,
 		slashingtypes.ModuleName,
 		evidencetypes.ModuleName,
 		stakingtypes.ModuleName,
 		authz.ModuleName,
+		epochstypes.ModuleName,
+		// evm modules
+		erc20types.ModuleName,
+		feemarkettypes.ModuleName,
+		evmtypes.ModuleName,
+		// ibc modules
+		ibcexported.ModuleName,
+		ibctransfertypes.ModuleName,
+		icatypes.ModuleName,
+		// other modules
 		genutiltypes.ModuleName,
-
-		// // chain modules
-		// wardenmoduletypes.ModuleName,
-		// actmoduletypes.ModuleName,
-		// asyncmoduletypes.ModuleName,
-		// schedmoduletypes.ModuleName,
-		// // slinky modules
-		// oracletypes.ModuleName,
-		// marketmaptypes.ModuleName,
 		precisebanktypes.ModuleName,
 		vestingtypes.ModuleName,
-		epochstypes.ModuleName,
 		vectormoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
@@ -215,26 +189,16 @@ var (
 		stakingtypes.ModuleName,
 		feegrant.ModuleName,
 		group.ModuleName,
-		genutiltypes.ModuleName,
+		// evm modules
+		evmtypes.ModuleName,
+		erc20types.ModuleName,
+		feemarkettypes.ModuleName,
 		// ibc modules
 		ibcexported.ModuleName,
 		ibctransfertypes.ModuleName,
 		icatypes.ModuleName,
-		// wasmtypes.ModuleName,
-		// chain modules
-		// wardenmoduletypes.ModuleName,
-		// actmoduletypes.ModuleName,
-		// asyncmoduletypes.ModuleName,
-		// schedmoduletypes.ModuleName,
-		// // slinky modules
-		// oracletypes.ModuleName,
-		// marketmaptypes.ModuleName,
-
-		// evm modules
-		evmtypes.ModuleName,
-		feemarkettypes.ModuleName,
-		erc20types.ModuleName,
-
+		// other modules
+		genutiltypes.ModuleName,
 		precisebanktypes.ModuleName,
 		vestingtypes.ModuleName,
 		vectormoduletypes.ModuleName,
