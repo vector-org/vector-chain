@@ -18,13 +18,28 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/rpc"
 	"github.com/cosmos/cosmos-sdk/client/snapshot"
 	"github.com/cosmos/cosmos-sdk/server"
+	serverconfig "github.com/cosmos/cosmos-sdk/server/config"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authcmd "github.com/cosmos/cosmos-sdk/x/auth/client/cli"
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 
+	// EVM server imports
+	evmcmd "github.com/cosmos/evm/client"
+	evmserver "github.com/cosmos/evm/server"
+	evmserverconfig "github.com/cosmos/evm/server/config"
+	srvflags "github.com/cosmos/evm/server/flags"
+
 	"vector/app"
 )
+
+// Define a custom app config struct
+type CustomAppConfig struct {
+	serverconfig.Config
+	EVM     evmserverconfig.EVMConfig     `mapstructure:"evm"`
+	JSONRPC evmserverconfig.JSONRPCConfig `mapstructure:"json-rpc"`
+	TLS     evmserverconfig.TLSConfig     `mapstructure:"tls"`
+}
 
 func initRootCmd(
 	rootCmd *cobra.Command,
@@ -41,9 +56,12 @@ func initRootCmd(
 		snapshot.Cmd(newApp),
 	)
 
-	server.AddCommandsWithStartCmdOptions(rootCmd, app.DefaultNodeHome, newApp, appExport, server.StartCmdOptions{
-		AddFlags: addModuleInitFlags,
-	})
+	evmserver.AddCommands(
+		rootCmd,
+		evmserver.NewDefaultStartOptions(newApp, app.DefaultNodeHome),
+		appExport,
+		addModuleInitFlags,
+	)
 
 	// add keybase, auxiliary RPC, query, genesis, and tx child commands
 	rootCmd.AddCommand(
@@ -52,7 +70,14 @@ func initRootCmd(
 		queryCommand(),
 		txCommand(),
 		keys.Commands(),
+		evmcmd.KeyCommands(app.DefaultNodeHome, true),
 	)
+
+	var err error
+	rootCmd, err = srvflags.AddTxFlags(rootCmd)
+	if err != nil {
+		panic(err)
+	}
 }
 
 // addModuleInitFlags adds more flags to the start command.

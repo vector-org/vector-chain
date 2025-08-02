@@ -39,10 +39,10 @@ func NoOpEvmAppOptions(_ uint64) error {
 // that allows initializing the app with different coin info based on the
 // chain id
 var ChainCoinInfo = evmtypes.EvmCoinInfo{
-	Denom:         "uvctr",
-	ExtendedDenom: "avctr",
-	DisplayDenom:  "VCTR",
-	Decimals:      evmtypes.SixDecimals,
+	Denom:         "atest",
+	ExtendedDenom: "atest", // Must be same as Denom for 18 decimals
+	DisplayDenom:  "TEST",
+	Decimals:      evmtypes.EighteenDecimals, // Changed from SixDecimals to EighteenDecimals for EVM compatibility
 }
 
 // EvmAppOptions allows to setup the global configuration
@@ -73,7 +73,6 @@ func EvmAppOptions(chainID uint64) error {
 }
 
 // setBaseDenom registers the display denom and base denom and sets the
-// base denom for the chain.
 func setBaseDenom(ci evmtypes.EvmCoinInfo) error {
 	if err := sdk.RegisterDenom(ci.DisplayDenom, math.LegacyOneDec()); err != nil {
 		return err
@@ -86,13 +85,14 @@ func setBaseDenom(ci evmtypes.EvmCoinInfo) error {
 
 var (
 	EVMChainIDMap = map[string]uint64{
-		"mantra-1":            5888, // mainnet Chain ID
-		"mantra-dukong-1":     5887, // testnet Chain ID
-		"mantra-canary-net-1": 5887, // devnet Chain ID
-		"9001":                9001, // local testnet Chain ID
+		"vector-1":         9000, // mainnet Chain ID
+		"vector-testnet-1": 9001, // testnet Chain ID
+		"vector-devnet-1":  9002, // devnet Chain ID
+		"9000":             9000, // local mainnet Chain ID
+		"9001":             9001, // local testnet Chain ID
 	}
 
-	MANTRAChainID uint64 = 262144 // default Chain ID
+	VectorChainID uint64 = 9000 // default Chain ID for vector chain
 )
 
 // init initializes the MANTRAChainID variable by reading the chain ID from the
@@ -131,7 +131,7 @@ func init() {
 			if err == nil && chainID != "" {
 				evmChainID, found := EVMChainIDMap[chainID]
 				if found {
-					MANTRAChainID = evmChainID
+					VectorChainID = evmChainID
 					return
 				}
 			}
@@ -155,7 +155,7 @@ func init() {
 			evmChainIDKey := "evm.evm-chain-id"
 			if v.IsSet(evmChainIDKey) {
 				evmChainID := v.GetUint64(evmChainIDKey)
-				MANTRAChainID = evmChainID
+				VectorChainID = evmChainID
 			}
 		}
 	}
@@ -196,7 +196,7 @@ func (app *App) setupEVM() error {
 				evmChainID = mappedChainID
 			} else {
 				// Fall back to default chain ID
-				evmChainID = MANTRAChainID
+				evmChainID = VectorChainID
 			}
 		} else {
 			evmChainID, err = strconv.ParseUint(chainID[from+1:to], 10, 64)

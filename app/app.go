@@ -87,7 +87,7 @@ const (
 	// AccountAddressPrefix is the prefix for accounts addresses.
 	AccountAddressPrefix = "cosmos"
 	// ChainCoinType is the coin type of the chain.
-	ChainCoinType = 118
+	ChainCoinType = 60 // Changed from 118 to 60 for EVM compatibility (Ethereum standard)
 )
 
 const (
@@ -98,7 +98,7 @@ const (
 
 // We pull these out so we can set them with LDFLAGS in the Makefile
 var (
-	NodeDir = ".mantrachain"
+	NodeDir = ".vector"
 	// DefaultNodeHome default home directories for the application daemon
 	DefaultNodeHome string
 )

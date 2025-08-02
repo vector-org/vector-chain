@@ -69,10 +69,17 @@ import (
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	_ "github.com/cosmos/cosmos-sdk/x/staking" // import for side-effects
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+
+	// EVM imports
+	_ "github.com/cosmos/evm/x/erc20" // import for side-effects
 	erc20types "github.com/cosmos/evm/x/erc20/types"
+	_ "github.com/cosmos/evm/x/feemarket" // import for side-effects
 	feemarkettypes "github.com/cosmos/evm/x/feemarket/types"
+	_ "github.com/cosmos/evm/x/precisebank" // import for side-effects
 	precisebanktypes "github.com/cosmos/evm/x/precisebank/types"
+	_ "github.com/cosmos/evm/x/vm" // import for side-effects
 	evmtypes "github.com/cosmos/evm/x/vm/types"
+
 	_ "github.com/cosmos/ibc-go/v10/modules/apps/27-interchain-accounts" // import for side-effects
 	icatypes "github.com/cosmos/ibc-go/v10/modules/apps/27-interchain-accounts/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v10/modules/apps/transfer/types"

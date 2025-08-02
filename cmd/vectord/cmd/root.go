@@ -13,9 +13,6 @@ import (
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/server"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/cosmos/cosmos-sdk/types/tx/signing"
-	"github.com/cosmos/cosmos-sdk/x/auth/tx"
-	txmodule "github.com/cosmos/cosmos-sdk/x/auth/tx/config"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 	evmkeyring "github.com/cosmos/evm/crypto/keyring"
 	"github.com/spf13/cobra"
@@ -28,7 +25,6 @@ import (
 // NewRootCmd creates a new root command for vectord. It is called once in the main function.
 func NewRootCmd() *cobra.Command {
 	var (
-		txConfigOpts       tx.ConfigOptions
 		autoCliOpts        autocli.AppOptions
 		moduleBasicManager module.BasicManager
 		clientCtx          client.Context
@@ -68,20 +64,18 @@ func NewRootCmd() *cobra.Command {
 				return err
 			}
 
-			// This needs to go after ReadFromClientConfig, as that function
-			// sets the RPC client needed for SIGN_MODE_TEXTUAL.
+			// Sign Mode Textual disabled for pure EVM compatibility
+			// txConfigOpts.EnabledSignModes = append(txConfigOpts.EnabledSignModes, signing.SignMode_SIGN_MODE_TEXTUAL)
+			// txConfigOpts.TextualCoinMetadataQueryFn = txmodule.NewGRPCCoinMetadataQueryFn(clientCtx)
+			// txConfigWithTextual, err := tx.NewTxConfigWithOptions(
+			// 	clientCtx.Codec,
+			// 	txConfigOpts,
+			// )
+			// if err != nil {
+			// 	return err
+			// }
 
-			txConfigOpts.EnabledSignModes = append(txConfigOpts.EnabledSignModes, signing.SignMode_SIGN_MODE_TEXTUAL)
-			txConfigOpts.TextualCoinMetadataQueryFn = txmodule.NewGRPCCoinMetadataQueryFn(clientCtx)
-			txConfigWithTextual, err := tx.NewTxConfigWithOptions(
-				clientCtx.Codec,
-				txConfigOpts,
-			)
-			if err != nil {
-				return err
-			}
-
-			clientCtx = clientCtx.WithTxConfig(txConfigWithTextual)
+			// clientCtx = clientCtx.WithTxConfig(txConfigWithTextual)
 
 			if err := client.SetCmdClientContextHandler(clientCtx, cmd); err != nil {
 				return err
@@ -142,14 +136,6 @@ func ProvideClientContext(
 
 	// Read the config again to overwrite the default values with the values from the config file
 	clientCtx, _ = config.ReadFromClientConfig(clientCtx)
-
-	// textual is enabled by default, we need to re-create the tx config grpc instead of bank keeper.
-	// txConfigOpts.TextualCoinMetadataQueryFn = authtxconfig.NewGRPCCoinMetadataQueryFn(clientCtx)
-	// txConfig, err := tx.NewTxConfigWithOptions(clientCtx.Codec, txConfigOpts)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// clientCtx = clientCtx.WithTxConfig(txConfig)
 
 	return clientCtx
 }
