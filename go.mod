@@ -41,7 +41,7 @@ require (
 	github.com/cometbft/cometbft v0.38.17
 	github.com/cosmos/cosmos-db v1.1.3
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
-	github.com/cosmos/cosmos-sdk v0.53.3
+	github.com/cosmos/cosmos-sdk v0.53.4
 	github.com/cosmos/evm v0.3.0
 	// github.com/cosmos/evm/evmd v0.0.0-20250725153303-2934281442b2
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
@@ -56,7 +56,7 @@ require (
 	github.com/prometheus/client_golang v1.22.0 // indirect
 	github.com/spf13/cast v1.9.2
 	github.com/spf13/cobra v1.9.1
-	github.com/spf13/pflag v1.0.6
+	github.com/spf13/pflag v1.0.7
 	github.com/spf13/viper v1.20.1
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/text v0.27.0 // indirect
@@ -482,7 +482,7 @@ require (
 	pluginrpc.com/pluginrpc v0.5.0 // indirect
 	rsc.io/qr v0.2.0 // indirect
 	rsc.io/tmplfunc v0.0.3 // indirect
-	sigs.k8s.io/yaml v1.5.0 // indirect
+	sigs.k8s.io/yaml v1.6.0 // indirect
 )
 
 tool (
