@@ -3,8 +3,6 @@ package app
 import (
 	"cosmossdk.io/core/appmodule"
 	storetypes "cosmossdk.io/store/types"
-
-	// "github.com/CosmWasm/wasmd/x/wasm"
 	srvflags "github.com/cosmos/evm/server/flags"
 
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -28,6 +26,7 @@ import (
 
 	erc20types "github.com/cosmos/evm/x/erc20/types"
 	erc20v2 "github.com/cosmos/evm/x/erc20/v2"
+
 	"github.com/cosmos/evm/x/feemarket"
 	feemarkettypes "github.com/cosmos/evm/x/feemarket/types"     // NOTE: override ICS20 keeper to support IBC transfers of ERC20 tokens
 	transferkeeper "github.com/cosmos/evm/x/ibc/transfer/keeper" // NOTE: override ICS20 keeper to support IBC transfers of ERC20 tokens
@@ -192,48 +191,6 @@ func (app *App) registerIBCModules(appOpts servertypes.AppOptions) error {
 		authAddr,
 	)
 
-	// WASM keepers
-
-	// app.ParamsKeeper.Subspace(wasmtypes.ModuleName)
-
-	// homePath := cast.ToString(appOpts.Get(flags.FlagHome))
-	// wasmDir := filepath.Join(homePath, "wasm")
-
-	// nodeConfig, err := wasm.ReadNodeConfig(appOpts)
-	// if err != nil {
-	// 	panic(fmt.Sprintf("error while reading wasm config: %s", err))
-	// }
-
-	// encoders := WardenProtocolCustomEncoder()
-	// queryPlugins := WardenProtocolCustomQueryPlugin(app.WardenKeeper)
-
-	// wasmOpts = append(wasmOpts, wasmkeeper.WithMessageEncoders(&encoders), wasmkeeper.WithQueryPlugins(&queryPlugins))
-
-	// app.WasmKeeper = wasmkeeper.NewKeeper(
-	// 	app.AppCodec(),
-	// 	runtime.NewKVStoreService(app.GetKey(wasmtypes.StoreKey)),
-	// 	app.AuthKeeper,
-	// 	app.BankKeeper,
-	// 	app.StakingKeeper,
-	// 	distrkeeper.NewQuerier(app.DistrKeeper),
-	// 	app.IBCKeeper.ChannelKeeper,
-	// 	app.IBCKeeper.ChannelKeeper,
-	// 	app.TransferKeeper,
-	// 	app.MsgServiceRouter(),
-	// 	app.GRPCQueryRouter(),
-	// 	wasmDir,
-	// 	nodeConfig,
-	// 	wasmtypes.VMConfig{},
-	// 	AllCapabilities(),
-	// 	authtypes.NewModuleAddress(govtypes.ModuleName).String(),
-	// 	wasmOpts...,
-	// )
-
-	// app.ContractKeeper = wasmkeeper.NewDefaultPermissionKeeper(&app.WasmKeeper)
-
-	// Create fee enabled wasm ibc Stack
-	// wasmStackIBCHandler := wasm.NewIBCHandler(app.WasmKeeper, app.IBCKeeper.ChannelKeeper, app.IBCKeeper.ChannelKeeper)
-
 	// Create Interchain Accounts Stack
 	// SendPacket, since it is originating from the application to core IBC:
 	// icaAuthModuleKeeper.SendTx -> icaController.SendPacket -> fee.SendPacket -> channel.SendPacket
@@ -298,6 +255,7 @@ func (app *App) registerIBCModules(appOpts servertypes.AppOptions) error {
 	// NOTE: we are just adding the default Ethereum precompiles here.
 	// Additional precompiles could be added if desired.
 	// Configure EVM precompiles
+
 	precompiles := NewAvailableStaticPrecompiles(
 		*app.StakingKeeper,
 		app.DistrKeeper,
@@ -311,10 +269,6 @@ func (app *App) registerIBCModules(appOpts servertypes.AppOptions) error {
 		app.EvidenceKeeper,
 		app.AppCodec(),
 		// app.VectorKeeper,
-		// app.ActKeeper,
-		// app.OracleKeeper,
-		// app.AsyncKeeper,
-		// app.SchedKeeper,
 	)
 
 	app.EVMKeeper.WithStaticPrecompiles(

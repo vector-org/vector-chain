@@ -66,7 +66,6 @@ import (
 	feemarketkeeper "github.com/cosmos/evm/x/feemarket/keeper"
 	precisebankkeeper "github.com/cosmos/evm/x/precisebank/keeper"
 	evmkeeper "github.com/cosmos/evm/x/vm/keeper"
-	vmkeeper "github.com/cosmos/evm/x/vm/keeper"
 	evmtypes "github.com/cosmos/evm/x/vm/types"
 
 	// Replace IBC transfer with EVM fork
@@ -74,7 +73,6 @@ import (
 	ibctransferkeeper "github.com/cosmos/evm/x/ibc/transfer/keeper"
 
 	// EVM server flags and ante (corrected paths)
-
 	srvflags "github.com/cosmos/evm/server/flags"
 
 	"vector/docs"
@@ -143,7 +141,7 @@ type App struct {
 	TransferKeeper      ibctransferkeeper.Keeper
 
 	// EVM keepers
-	EVMKeeper         *vmkeeper.Keeper
+	EVMKeeper         *evmkeeper.Keeper
 	FeeMarketKeeper   feemarketkeeper.Keeper
 	Erc20Keeper       erc20keeper.Keeper
 	PreciseBankKeeper precisebankkeeper.Keeper
