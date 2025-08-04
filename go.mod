@@ -6,6 +6,9 @@ replace (
 	// use cosmos fork of keyring
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 
+	// Use specific commit for cosmos/evm
+	// github.com/cosmos/evm => github.com/cosmos/evm v0.0.0-20250730134831-8c0d0e75dd6f
+
 	// Use Cosmos-patched Geth to avoid cgo/crypto issues
 	github.com/ethereum/go-ethereum => github.com/cosmos/go-ethereum v1.15.11-cosmos-0
 	// fix upstream GHSA-h395-qcrw-5vmq vulnerability.
@@ -16,7 +19,6 @@ replace (
 	nhooyr.io/websocket => github.com/coder/websocket v1.8.7
 
 // github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
-
 // replace broken goleveldb
 
 )
@@ -34,7 +36,7 @@ require (
 	cosmossdk.io/tools/confix v0.1.2
 	cosmossdk.io/x/circuit v0.1.1
 	cosmossdk.io/x/evidence v0.2.0
-	cosmossdk.io/x/feegrant v0.2.0
+	// cosmossdk.io/x/feegrant v0.2.0
 	cosmossdk.io/x/tx v0.14.0
 	cosmossdk.io/x/upgrade v0.2.0
 	github.com/bufbuild/buf v1.55.1 // indirect
