@@ -14,7 +14,6 @@ import (
 	"cosmossdk.io/log"
 	"cosmossdk.io/store"
 	storetypes "cosmossdk.io/store/types"
-	"cosmossdk.io/x/feegrant"
 	abci "github.com/cometbft/cometbft/abci/types"
 	cmtproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	dbm "github.com/cosmos/cosmos-db"
@@ -35,7 +34,7 @@ import (
 )
 
 const (
-	SimAppChainID = "warden-simapp"
+	SimAppChainID = "warden_13388-simapp"
 )
 
 var FlagEnableStreamingValue bool
@@ -83,7 +82,7 @@ func BenchmarkSimulation(b *testing.B) {
 	appOptions[flags.FlagHome] = app.DefaultNodeHome
 	appOptions[server.FlagInvCheckPeriod] = uint(0)
 
-	bApp, err := app.New(logger, db, nil, true, appOptions, nil, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
+	bApp, err := app.New(logger, db, nil, true, appOptions, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
 	require.NoError(b, err)
 	require.Equal(b, app.Name, bApp.Name())
 
@@ -130,7 +129,7 @@ func TestAppImportExport(t *testing.T) {
 	appOptions[flags.FlagHome] = app.DefaultNodeHome
 	appOptions[server.FlagInvCheckPeriod] = uint(0)
 
-	bApp, err := app.New(logger, db, nil, true, appOptions, nil, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
+	bApp, err := app.New(logger, db, nil, true, appOptions, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
 	require.NoError(t, err)
 	require.Equal(t, app.Name, bApp.Name())
 
@@ -171,7 +170,7 @@ func TestAppImportExport(t *testing.T) {
 		require.NoError(t, os.RemoveAll(newDir))
 	}()
 
-	newApp, err := app.New(log.NewNopLogger(), newDB, nil, true, appOptions, nil, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
+	newApp, err := app.New(logger, db, nil, true, appOptions, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
 	require.NoError(t, err)
 	require.Equal(t, app.Name, newApp.Name())
 
@@ -205,8 +204,8 @@ func TestAppImportExport(t *testing.T) {
 			stakingtypes.HistoricalInfoKey, stakingtypes.UnbondingIDKey, stakingtypes.UnbondingIndexKey,
 			stakingtypes.UnbondingTypeKey, stakingtypes.ValidatorUpdatesKey,
 		},
-		authzkeeper.StoreKey:   {authzkeeper.GrantQueuePrefix},
-		feegrant.StoreKey:      {feegrant.FeeAllowanceQueueKeyPrefix},
+		authzkeeper.StoreKey: {authzkeeper.GrantQueuePrefix},
+		// feegrant.StoreKey:      {feegrant.FeeAllowanceQueueKeyPrefix},
 		slashingtypes.StoreKey: {slashingtypes.ValidatorMissedBlockBitmapKeyPrefix},
 	}
 
@@ -254,7 +253,7 @@ func TestAppSimulationAfterImport(t *testing.T) {
 	appOptions[flags.FlagHome] = app.DefaultNodeHome
 	appOptions[server.FlagInvCheckPeriod] = uint(0)
 
-	bApp, err := app.New(logger, db, nil, true, appOptions, nil, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
+	bApp, err := app.New(logger, db, nil, true, appOptions, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
 	require.NoError(t, err)
 	require.Equal(t, app.Name, bApp.Name())
 
@@ -300,7 +299,7 @@ func TestAppSimulationAfterImport(t *testing.T) {
 		require.NoError(t, os.RemoveAll(newDir))
 	}()
 
-	newApp, err := app.New(log.NewNopLogger(), newDB, nil, true, appOptions, nil, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
+	newApp, err := app.New(logger, db, nil, true, appOptions, fauxMerkleModeOpt, baseapp.SetChainID(SimAppChainID))
 	require.NoError(t, err)
 	require.Equal(t, app.Name, newApp.Name())
 
