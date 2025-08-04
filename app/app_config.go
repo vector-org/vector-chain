@@ -89,6 +89,8 @@ import (
 
 	vectorconfig "vector/cmd/vectord/cmd/config"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
+
 	// vectorconfig "vector/cmd/vectord/cmd"
 
 	"google.golang.org/protobuf/types/known/durationpb"
@@ -96,6 +98,19 @@ import (
 
 func init() {
 	// config := sdk.GetConfig()
+	accountPubKeyPrefix := AccountAddressPrefix + "pub"
+	validatorAddressPrefix := AccountAddressPrefix + "valoper"
+	validatorPubKeyPrefix := AccountAddressPrefix + "valoperpub"
+	consNodeAddressPrefix := AccountAddressPrefix + "valcons"
+	consNodePubKeyPrefix := AccountAddressPrefix + "valconspub"
+
+	// // Set and seal config
+	config := sdk.GetConfig()
+	config.SetCoinType(ChainCoinType)
+	config.SetBech32PrefixForAccount(AccountAddressPrefix, accountPubKeyPrefix)
+	config.SetBech32PrefixForValidator(validatorAddressPrefix, validatorPubKeyPrefix)
+	config.SetBech32PrefixForConsensusNode(consNodeAddressPrefix, consNodePubKeyPrefix)
+	config.Seal()
 
 	// config.Seal()
 }
