@@ -141,11 +141,16 @@ func newApp(
 ) servertypes.Application {
 	baseappOptions := server.DefaultBaseappOptions(appOpts)
 
-	return app.New(
+	app, err := app.New(
 		logger, db, traceStore, true,
 		appOpts,
 		baseappOptions...,
 	)
+	if err != nil {
+		panic(err)
+	}
+
+	return app
 }
 
 // appExport creates a new app (optionally at a given height) and exports state.
@@ -175,12 +180,12 @@ func appExport(
 
 	appOpts = viperAppOpts
 	if height != -1 {
-		bApp = app.New(logger, db, traceStore, false, appOpts)
+		bApp, _ = app.New(logger, db, traceStore, false, appOpts)
 		if err := bApp.LoadHeight(height); err != nil {
 			return servertypes.ExportedApp{}, err
 		}
 	} else {
-		bApp = app.New(logger, db, traceStore, true, appOpts)
+		bApp, _ = app.New(logger, db, traceStore, true, appOpts)
 	}
 
 	return bApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs, modulesToExport)
