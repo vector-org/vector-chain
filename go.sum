@@ -973,8 +973,6 @@ github.com/cosmos/cosmos-proto v1.0.0-beta.5 h1:eNcayDLpip+zVLRLYafhzLvQlSmyab+R
 github.com/cosmos/cosmos-proto v1.0.0-beta.5/go.mod h1:hQGLpiIUloJBMdQMMWb/4wRApmI9hjHH05nefC0Ojec=
 github.com/cosmos/cosmos-sdk v0.53.4 h1:kPF6vY68+/xi1/VebSZGpoxQqA52qkhUzqkrgeBn3Mg=
 github.com/cosmos/cosmos-sdk v0.53.4/go.mod h1:7U3+WHZtI44dEOnU46+lDzBb2tFh1QlMvi8Z5JugopI=
-github.com/cosmos/evm v0.3.0 h1:eXELtkofmbfuDvbUqpZdRYuXRdpn7tZd6EyXQfBTkzU=
-github.com/cosmos/evm v0.3.0/go.mod h1:5CXFoQfFcu5XfouVLcAm6uJnGg01hmmU20OLJ0gJgLY=
 github.com/cosmos/go-bip39 v1.0.0 h1:pcomnQdrdH22njcAatO0yWojsUnCO3y2tNoV1cb6hHY=
 github.com/cosmos/go-bip39 v1.0.0/go.mod h1:RNJv0H/pOIVgxw6KS7QeX2a0Uo0aKUlfhZ4xuwvCdJw=
 github.com/cosmos/go-ethereum v1.15.11-cosmos-0 h1:a8C6CAL2ta06CYpI08a3jM1OdjRquYe4ur6JMjL35lQ=
@@ -1083,6 +1081,8 @@ github.com/eapache/go-resiliency v1.1.0/go.mod h1:kFI+JgMyC7bLPUVY133qvEBtVayf5m
 github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21/go.mod h1:+020luEh2TKB4/GOp8oxxtq0Daoen/Cii55CzbTV6DU=
 github.com/eapache/queue v1.1.0/go.mod h1:6eCeP0CKFpHLu8blIFXhExK/dRa7WDZfr6jVFPTqq+I=
 github.com/edsrzf/mmap-go v1.0.0/go.mod h1:YO35OhQPt3KJa3ryjFM5Bs14WD66h8eGKpfaBNrHW5M=
+github.com/elix1er/evm v0.0.0-20250731063539-086a5c7e4a52 h1:WgmJsiWHtE/M2Yzd7R88+bjFrSe9hs9r657lCclMxts=
+github.com/elix1er/evm v0.0.0-20250731063539-086a5c7e4a52/go.mod h1:5CXFoQfFcu5XfouVLcAm6uJnGg01hmmU20OLJ0gJgLY=
 github.com/emicklei/dot v1.6.2 h1:08GN+DD79cy/tzN6uLCT84+2Wk9u+wvqP+Hkx/dIR8A=
 github.com/emicklei/dot v1.6.2/go.mod h1:DeV7GvQtIw4h2u73RKBkkFdvVAz0D9fzeJrgPW6gy/s=
 github.com/envoyproxy/go-control-plane v0.6.9/go.mod h1:SBwIajubJHhxtWwsL9s8ss4safvEdbitLhGGK48rN6g=

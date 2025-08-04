@@ -7,7 +7,7 @@ replace (
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 
 	// Use specific commit for cosmos/evm
-	// github.com/cosmos/evm => github.com/cosmos/evm v0.0.0-20250730134831-8c0d0e75dd6f
+	github.com/cosmos/evm => github.com/elix1er/evm v0.0.0-20250731063539-086a5c7e4a52
 
 	// Use Cosmos-patched Geth to avoid cgo/crypto issues
 	github.com/ethereum/go-ethereum => github.com/cosmos/go-ethereum v1.15.11-cosmos-0
