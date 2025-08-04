@@ -3,165 +3,28 @@ package app
 import (
 	"errors"
 	"fmt"
-	"os"
-	"path/filepath"
 	"strconv"
 	"strings"
 
-	clienthelpers "cosmossdk.io/client/v2/helpers"
 	"cosmossdk.io/math"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/codec/legacy"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
-	evmcodec "github.com/cosmos/evm/encoding/codec"
-
-	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	"github.com/cosmos/evm/crypto/ethsecp256k1"
+	evmcodec "github.com/cosmos/evm/encoding/codec"
 	"github.com/cosmos/evm/ethereum/eip712"
 	evmtypes "github.com/cosmos/evm/x/vm/types"
-	"github.com/spf13/viper"
 )
-
-// EVMOptionsFn defines a function type for setting app options specifically for
-// the Cosmos EVM app. The function should receive the chainID and return an error if
-// any.
-type EVMOptionsFn func(uint64) error
 
 var sealed = false
 
-func NoOpEvmAppOptions(_ uint64) error {
-	return nil
-}
-
-// ChainsCoinInfo is a map of the chain id and its corresponding EvmCoinInfo
-// that allows initializing the app with different coin info based on the
-// chain id
-var ChainCoinInfo = evmtypes.EvmCoinInfo{
+var coinInfo = evmtypes.EvmCoinInfo{
 	Denom:         "atest",
-	ExtendedDenom: "atest", // Must be same as Denom for 18 decimals
+	ExtendedDenom: "atest",
 	DisplayDenom:  "TEST",
-	Decimals:      evmtypes.EighteenDecimals, // Changed from SixDecimals to EighteenDecimals for EVM compatibility
-}
-
-// EvmAppOptions allows to setup the global configuration
-// for the Cosmos EVM chain.
-func EvmAppOptions(chainID uint64) error {
-	if sealed {
-		return nil
-	}
-
-	// set the denom info for the chain
-	if err := setBaseDenom(ChainCoinInfo); err != nil {
-		return err
-	}
-
-	ethCfg := evmtypes.DefaultChainConfig(chainID)
-
-	err := evmtypes.NewEVMConfigurator().
-		WithExtendedEips(cosmosEVMActivators).
-		WithChainConfig(ethCfg).
-		WithEVMCoinInfo(ChainCoinInfo).
-		Configure()
-	if err != nil {
-		return err
-	}
-
-	sealed = true
-	return nil
-}
-
-// setBaseDenom registers the display denom and base denom and sets the
-func setBaseDenom(ci evmtypes.EvmCoinInfo) error {
-	if err := sdk.RegisterDenom(ci.DisplayDenom, math.LegacyOneDec()); err != nil {
-		return err
-	}
-
-	// sdk.RegisterDenom will automatically overwrite the base denom when the
-	// new setBaseDenom() are lower than the current base denom's units.
-	return sdk.RegisterDenom(ci.Denom, math.LegacyNewDecWithPrec(1, int64(ci.Decimals)))
-}
-
-var (
-	EVMChainIDMap = map[string]uint64{
-		"vector-1":         9000, // mainnet Chain ID
-		"vector-testnet-1": 9001, // testnet Chain ID
-		"vector-devnet-1":  9002, // devnet Chain ID
-		"9000":             9000, // local mainnet Chain ID
-		"9001":             9001, // local testnet Chain ID
-	}
-
-	VectorChainID uint64 = 9000 // default Chain ID for vector chain
-)
-
-// init initializes the MANTRAChainID variable by reading the chain ID from the
-// genesis file or app.toml file in the node's home directory.
-// If the genesis file exists, it reads the Cosmos chain ID from there and finds the EVM Chain ID
-// against the EVMChainIDMap; otherwise, it checks the app.toml file for the EVM chain ID.
-// If neither file exists or the chain ID is not found, it defaults to the MANTRA Chain ID (262144).
-func init() {
-	// Set prefixes
-	accountPubKeyPrefix := AccountAddressPrefix + "pub"
-	validatorAddressPrefix := AccountAddressPrefix + "valoper"
-	validatorPubKeyPrefix := AccountAddressPrefix + "valoperpub"
-	consNodeAddressPrefix := AccountAddressPrefix + "valcons"
-	consNodePubKeyPrefix := AccountAddressPrefix + "valconspub"
-
-	// // Set and seal config
-	config := sdk.GetConfig()
-	config.SetCoinType(ChainCoinType)
-	config.SetBech32PrefixForAccount(AccountAddressPrefix, accountPubKeyPrefix)
-	config.SetBech32PrefixForValidator(validatorAddressPrefix, validatorPubKeyPrefix)
-	config.SetBech32PrefixForConsensusNode(consNodeAddressPrefix, consNodePubKeyPrefix)
-	config.Seal()
-
-	nodeHome, err := clienthelpers.GetNodeHomeDirectory(NodeDir)
-	if err != nil {
-		panic(err)
-	}
-
-	// check if the genesis file exists and read the chain ID from it
-	genesisFilePath := filepath.Join(nodeHome, "config", "genesis.json")
-	if _, err = os.Stat(genesisFilePath); err == nil {
-		// File exists, read the genesis file to get the chain ID
-		reader, err := os.Open(genesisFilePath)
-		if err == nil {
-			chainID, err := genutiltypes.ParseChainIDFromGenesis(reader)
-			if err == nil && chainID != "" {
-				evmChainID, found := EVMChainIDMap[chainID]
-				if found {
-					VectorChainID = evmChainID
-					return
-				}
-			}
-			defer reader.Close()
-		}
-	}
-	if err != nil && !os.IsNotExist(err) {
-		panic(err)
-	}
-
-	// If genesis file does not exist or chain ID is not found, check app.toml
-	// to get the EVM chain ID
-	appTomlPath := filepath.Join(nodeHome, "config", "app.toml")
-	if _, err = os.Stat(appTomlPath); err == nil {
-		// File exists
-		v := viper.New()
-		v.SetConfigFile(appTomlPath)
-		v.SetConfigType("toml")
-
-		if err = v.ReadInConfig(); err == nil {
-			evmChainIDKey := "evm.evm-chain-id"
-			if v.IsSet(evmChainIDKey) {
-				evmChainID := v.GetUint64(evmChainIDKey)
-				VectorChainID = evmChainID
-			}
-		}
-	}
-	if err != nil && !os.IsNotExist(err) {
-		panic(err)
-	}
+	Decimals:      evmtypes.EighteenDecimals,
 }
 
 func RegisterEVMCodec(legacyAmino *codec.LegacyAmino, interfaceRegistry codectypes.InterfaceRegistry) {
@@ -181,43 +44,25 @@ func (app *App) setupEVM() error {
 	}
 
 	chainID := app.ChainID()
-	var evmChainID uint64
-	var err error
+	from := strings.LastIndexByte(chainID, '_')
+	to := strings.LastIndexByte(chainID, '-')
 
-	// Try to parse chain ID directly as uint64 first (for simple numeric chain IDs like "9001")
-	if evmChainID, err = strconv.ParseUint(chainID, 10, 64); err != nil {
-		// If direct parsing fails, try to extract from formatted chain ID (e.g., "cosmos_1234-1")
-		from := strings.LastIndexByte(chainID, '_')
-		to := strings.LastIndexByte(chainID, '-')
-
-		if from == -1 || to == -1 || from >= to {
-			// If we can't parse it either way, check the EVMChainIDMap
-			if mappedChainID, found := EVMChainIDMap[chainID]; found {
-				evmChainID = mappedChainID
-			} else {
-				// Fall back to default chain ID
-				evmChainID = VectorChainID
-			}
-		} else {
-			evmChainID, err = strconv.ParseUint(chainID[from+1:to], 10, 64)
-			if err != nil {
-				return fmt.Errorf("can't parse evm chain id from %s: %w", chainID, err)
-			}
-		}
+	evmChainID, err := strconv.ParseUint(chainID[from+1:to], 10, 64)
+	if err != nil {
+		return fmt.Errorf("can't parse evm chain id from %s: %w", chainID, err)
 	}
 
 	eip712.SetEncodingConfig(app.legacyAmino, app.interfaceRegistry, evmChainID)
 
 	// set the denom info for the chain
-	if err := setBaseDenom(ChainCoinInfo); err != nil {
+	if err := setBaseDenom(coinInfo); err != nil {
 		return err
 	}
 
 	ethCfg := evmtypes.DefaultChainConfig(evmChainID)
 	if err := evmtypes.NewEVMConfigurator().
-		WithExtendedEips(cosmosEVMActivators).
 		WithChainConfig(ethCfg).
-		WithEVMCoinInfo(ChainCoinInfo).
+		WithEVMCoinInfo(coinInfo).
 		Configure(); err != nil {
 		return err
 	}
@@ -227,14 +72,14 @@ func (app *App) setupEVM() error {
 	return nil
 }
 
-// // setBaseDenom registers the display denom and base denom and sets the
-// // base denom for the chain.
-// func setBaseDenom(ci evmtypes.EvmCoinInfo) error {
-// 	if err := sdk.RegisterDenom(ci.DisplayDenom, math.LegacyOneDec()); err != nil {
-// 		return err
-// 	}
+// setBaseDenom registers the display denom and base denom and sets the
+// base denom for the chain.
+func setBaseDenom(ci evmtypes.EvmCoinInfo) error {
+	if err := sdk.RegisterDenom(ci.DisplayDenom, math.LegacyOneDec()); err != nil {
+		return err
+	}
 
-// 	// sdk.RegisterDenom will automatically overwrite the base denom when the
-// 	// new setBaseDenom() are lower than the current base denom's units.
-// 	return sdk.RegisterDenom(ci.Denom, math.LegacyNewDecWithPrec(1, int64(ci.Decimals)))
-// }
+	// sdk.RegisterDenom will automatically overwrite the base denom when the
+	// new setBaseDenom() are lower than the current base denom's units.
+	return sdk.RegisterDenom(ci.Denom, math.LegacyNewDecWithPrec(1, int64(ci.Decimals)))
+}
