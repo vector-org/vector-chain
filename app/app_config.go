@@ -15,7 +15,6 @@ import (
 	distrmodulev1 "cosmossdk.io/api/cosmos/distribution/module/v1"
 	epochsmodulev1 "cosmossdk.io/api/cosmos/epochs/module/v1"
 	evidencemodulev1 "cosmossdk.io/api/cosmos/evidence/module/v1"
-	feegrantmodulev1 "cosmossdk.io/api/cosmos/feegrant/module/v1"
 	genutilmodulev1 "cosmossdk.io/api/cosmos/genutil/module/v1"
 	govmodulev1 "cosmossdk.io/api/cosmos/gov/module/v1"
 	groupmodulev1 "cosmossdk.io/api/cosmos/group/module/v1"
@@ -35,8 +34,9 @@ import (
 	circuittypes "cosmossdk.io/x/circuit/types"
 	_ "cosmossdk.io/x/evidence" // import for side-effects
 	evidencetypes "cosmossdk.io/x/evidence/types"
-	"cosmossdk.io/x/feegrant"
-	_ "cosmossdk.io/x/feegrant/module" // import for side-effects
+
+	// "cosmossdk.io/x/feegrant"
+	// _ "cosmossdk.io/x/feegrant/module" // import for side-effects
 	"cosmossdk.io/x/tx/signing"
 	_ "cosmossdk.io/x/upgrade" // import for side-effects
 	upgradetypes "cosmossdk.io/x/upgrade/types"
@@ -123,7 +123,7 @@ var (
 		minttypes.ModuleName,
 		evidencetypes.ModuleName,
 		authz.ModuleName,
-		feegrant.ModuleName,
+		// feegrant.ModuleName,
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
@@ -175,7 +175,7 @@ var (
 		// cosmos sdk modules
 		govtypes.ModuleName,
 		stakingtypes.ModuleName,
-		feegrant.ModuleName,
+		// feegrant.ModuleName,
 		group.ModuleName,
 		// evm modules
 		evmtypes.ModuleName,
@@ -334,10 +334,10 @@ func moduleConfig() depinject.Config {
 					}),
 				},
 
-				{
-					Name:   feegrant.ModuleName,
-					Config: appconfig.WrapAny(&feegrantmodulev1.Module{}),
-				},
+				// {
+				// 	Name:   feegrant.ModuleName,
+				// 	Config: appconfig.WrapAny(&feegrantmodulev1.Module{}),
+				// },
 				{
 					Name:   govtypes.ModuleName,
 					Config: appconfig.WrapAny(&govmodulev1.Module{}),

@@ -38,6 +38,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/auth"
+
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	authsims "github.com/cosmos/cosmos-sdk/x/auth/simulation"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
@@ -197,6 +198,26 @@ func AppConfig() depinject.Config {
 	)
 }
 
+// NewTxConfig initializes a new TxConfig, equivalent to the one used by [App].
+func NewTxConfig() client.TxConfig {
+	var txConfig client.TxConfig
+
+	appConfig := depinject.Configs(
+		AppConfig(),
+		depinject.Supply(
+			log.NewNopLogger(),
+		),
+	)
+
+	if err := depinject.Inject(appConfig,
+		&txConfig,
+	); err != nil {
+		panic(err)
+	}
+
+	return txConfig
+}
+
 // New returns a reference to an initialized App.
 func New(
 	logger log.Logger,
@@ -255,6 +276,10 @@ func New(
 		panic(err)
 	}
 
+	if app.txConfig == nil || app.txConfig.TxDecoder() == nil {
+		panic("TxConfig/TxDecoder is nil – ensure ProvideTxConfig and dependencies are provided")
+	}
+
 	updatedBaseAppOptions := append(
 		[]func(*baseapp.BaseApp){
 			func(bApp *baseapp.BaseApp) {
@@ -266,7 +291,6 @@ func New(
 	app.App = appBuilder.Build(db, traceStore, updatedBaseAppOptions...)
 
 	RegisterEVMCodec(app.legacyAmino, app.interfaceRegistry)
-
 	app.SetTxEncoder(app.txConfig.TxEncoder())
 
 	if err := app.setupEVM(); err != nil {
