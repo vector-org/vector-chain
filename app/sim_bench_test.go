@@ -1,29 +1,28 @@
-package app
+package app_test
 
 import (
 	"os"
 	"testing"
 
-	"github.com/spf13/viper"
-	"github.com/stretchr/testify/require"
-
-	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client/flags"
+	"github.com/cosmos/cosmos-sdk/server"
 	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 	simcli "github.com/cosmos/cosmos-sdk/x/simulation/client/cli"
+	"github.com/stretchr/testify/require"
+
+	"vector/app"
 )
 
-// Profile with:
-// `go test -benchmem -run=^$ ./app -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out`
+// `go test -benchmem -run=^$ -bench ^BenchmarkFullAppSimulation ./app -Commit=true -cpuprofile cpu.out`.
 func BenchmarkFullAppSimulation(b *testing.B) {
 	b.ReportAllocs()
 
 	config := simcli.NewConfigFromFlags()
 	config.ChainID = SimAppChainID
 
-	db, dir, logger, skip, err := simtestutil.SetupSimulation(config, "goleveldb-app-sim", "Simulation", simcli.FlagVerboseValue, simcli.FlagEnabledValue)
+	db, dir, logger, skip, err := simtestutil.SetupSimulation(config, "goleveldb-app-sim", "Simulation", simcli.FlagVerboseValue, false)
 	if err != nil {
 		b.Fatalf("simulation setup failed: %s", err.Error())
 	}
@@ -37,35 +36,29 @@ func BenchmarkFullAppSimulation(b *testing.B) {
 		require.NoError(b, os.RemoveAll(dir))
 	}()
 
-	appOptions := viper.New()
-	if FlagEnableStreamingValue {
-		m := make(map[string]interface{})
-		m["streaming.abci.keys"] = []string{"*"}
-		m["streaming.abci.plugin"] = "abci_v1"
-		m["streaming.abci.stop-node-on-err"] = true
-		for key, value := range m {
-			appOptions.SetDefault(key, value)
-		}
-	}
-	appOptions.SetDefault(flags.FlagHome, DefaultNodeHome)
+	appOptions := make(simtestutil.AppOptionsMap, 0)
+	appOptions[flags.FlagHome] = app.DefaultNodeHome
+	appOptions[server.FlagInvCheckPeriod] = false
 
-	app := New(logger, db, nil, true, appOptions, interBlockCacheOpt(), baseapp.SetChainID(SimAppChainID))
+	bApp, err := app.New(logger, db, nil, true, appOptions, nil, interBlockCacheOpt())
+	require.NoError(b, err)
+	require.Equal(b, app.Name, bApp.Name())
 
 	// run randomized simulation
 	_, simParams, simErr := simulation.SimulateFromSeed(
 		b,
 		os.Stdout,
-		app.BaseApp,
-		simtestutil.AppStateFn(app.AppCodec(), app.SimulationManager(), app.DefaultGenesis()),
+		bApp.BaseApp,
+		simtestutil.AppStateFn(bApp.AppCodec(), bApp.SimulationManager(), bApp.DefaultGenesis()),
 		simtypes.RandomAccounts, // Replace with own random account function if using keys other than secp256k1
-		simtestutil.SimulationOperations(app, app.AppCodec(), config),
-		BlockedAddresses(),
+		simtestutil.SimulationOperations(bApp, bApp.AppCodec(), config),
+		app.BlockedAddresses(),
 		config,
-		app.AppCodec(),
+		bApp.AppCodec(),
 	)
 
 	// export state and simParams before the simulation error is checked
-	if err = simtestutil.CheckExportSimulation(app, config, simParams); err != nil {
+	if err = simtestutil.CheckExportSimulation(bApp, config, simParams); err != nil {
 		b.Fatal(err)
 	}
 
