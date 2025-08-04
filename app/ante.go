@@ -4,23 +4,76 @@ import (
 	"errors"
 
 	errorsmod "cosmossdk.io/errors"
+	storetypes "cosmossdk.io/store/types"
 	circuitante "cosmossdk.io/x/circuit/ante"
 	circuitkeeper "cosmossdk.io/x/circuit/keeper"
+
+	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
+	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+
+	// check the exact path in your evm version:
+
+	evmante "github.com/cosmos/evm/ante"
+	evmanteevmante "github.com/cosmos/evm/ante/evm" // IGNORE
 
 	// wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	// wasmTypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	"github.com/cosmos/cosmos-sdk/codec"
+	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"
+	"github.com/cosmos/cosmos-sdk/crypto/keys/multisig"
+	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
+	"github.com/cosmos/cosmos-sdk/types/tx/signing"
+
+	// "github.com/cosmos/cosmos-sdk/types/tx/signing"
+	// authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	cosmosante "github.com/cosmos/evm/ante/cosmos"
-	evmante "github.com/cosmos/evm/ante/evm"
+	// evmante "github.com/cosmos/evm/ante/evm"
 	anteinterfaces "github.com/cosmos/evm/ante/interfaces"
 	evmtypes "github.com/cosmos/evm/x/vm/types"
 	ibcante "github.com/cosmos/ibc-go/v10/modules/core/ante"
 	"github.com/cosmos/ibc-go/v10/modules/core/keeper"
-	// schedv1beta1 "github.com/warden-protocol/wardenprotocol/api/warden/sched/v1beta1"
 )
+
+// TODO: Signing verification gas consumer should be able to handle both EVM and Cosmos SDK public keys.
+
+// MixedSigVerificationGasConsumer consumes gas for signature verification based on the public key type.
+// It supports both EVM-style and standard Cosmos SDK public keys.
+func MixedSigVerificationGasConsumer(
+	meter storetypes.GasMeter,
+	sig signing.SignatureV2,
+	params authtypes.Params,
+) error {
+	pubkey := sig.PubKey
+	switch pubkey.(type) {
+	case *secp256k1.PubKey, *ed25519.PubKey, *multisig.LegacyAminoPubKey:
+		// Standard Cosmos SDK public keys: use default SDK consumer
+		return authante.DefaultSigVerificationGasConsumer(meter, sig, params)
+	default:
+		// For other types (including EVM keys), try the EVM consumer
+		return evmante.SigVerificationGasConsumer(meter, sig, params)
+	}
+}
+
+// func MixedSigVerificationGasConsumer(
+// 	m storetypes.GasMeter,
+// 	sig signing.SignatureV2,
+// 	params authtypes.Params,
+// ) error {
+// 	switch sig.PubKey.(type) {
+// 	case *ethsdk.PubKey:
+// 		// EVM-style account: use EVM consumer
+// 		return evmante.SigVerificationGasConsumer(m, sig, params)
+
+// 	case *sdksecp.PubKey, *sdked25519.PubKey, *sdkmultisig.LegacyAminoPubKey:
+// 		// Standard SDK accounts: use default SDK consumer
+// 		return authante.DefaultSigVerificationGasConsumer(m, sig, params)
+
+// 	default:
+// 		return sdkerrors.ErrInvalidPubKey.Wrapf("unsupported pubkey type %T", sig.PubKey)
+// 	}
+// }
 
 // HandlerOptions extend the SDK's AnteHandler options by requiring the IBC
 // channel keeper, wasm keeper and evm keepers.
@@ -74,7 +127,7 @@ func newCosmosAnteHandler(options HandlerOptions) sdk.AnteHandler {
 
 func newMonoEVMAnteHandler(options HandlerOptions) sdk.AnteHandler {
 	return sdk.ChainAnteDecorators(
-		evmante.NewEVMMonoDecorator(
+		evmanteevmante.NewEVMMonoDecorator(
 			options.AccountKeeper,
 			options.FeeMarketKeeper,
 			options.EVMKeeper,
