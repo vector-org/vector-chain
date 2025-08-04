@@ -89,28 +89,9 @@ import (
 
 	vectorconfig "vector/cmd/vectord/cmd/config"
 
-	// marketmapmodulev1 "github.com/skip-mev/slinky/api/slinky/marketmap/module/v1"
-	// oraclemodulev1 "github.com/skip-mev/slinky/api/slinky/oracle/module/v1"
-	// _ "github.com/skip-mev/slinky/x/marketmap" // import for side-effects
-	// marketmaptypes "github.com/skip-mev/slinky/x/marketmap/types"
-	// _ "github.com/skip-mev/slinky/x/oracle" // import for side-effects
-	// oracletypes "github.com/skip-mev/slinky/x/oracle/types"
-
 	// vectorconfig "vector/cmd/vectord/cmd"
 
 	"google.golang.org/protobuf/types/known/durationpb"
-	// actmodulev1 "github.com/warden-protocol/wardenprotocol/api/warden/act/module"
-	// asyncmodulev1 "github.com/warden-protocol/wardenprotocol/api/warden/async/module"
-	// schedmodulev1 "github.com/warden-protocol/wardenprotocol/api/warden/sched/module"
-	// wardenmodulev1 "github.com/warden-protocol/wardenprotocol/api/warden/warden/module"
-	// _ "github.com/warden-protocol/wardenprotocol/warden/x/act/module" // import for side-effects
-	// actmoduletypes "github.com/warden-protocol/wardenprotocol/warden/x/act/types/v1beta1"
-	// _ "github.com/warden-protocol/wardenprotocol/warden/x/async/module" // import for side-effects
-	// asyncmoduletypes "github.com/warden-protocol/wardenprotocol/warden/x/async/types/v1beta1"
-	// _ "github.com/warden-protocol/wardenprotocol/warden/x/sched/module" // import for side-effects
-	// schedmoduletypes "github.com/warden-protocol/wardenprotocol/warden/x/sched/types/v1beta1"
-	// _ "vector/x/vector/module" // import for side-effects
-	// wardenmoduletypes "github.com/warden-protocol/wardenprotocol/warden/x/warden/types/v1beta3"
 )
 
 func init() {
@@ -228,11 +209,7 @@ var (
 		{Account: govtypes.ModuleName, Permissions: []string{authtypes.Burner}},
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: icatypes.ModuleName},
-		// {Account: actmoduletypes.ModuleName},
-		// {Account: asyncmoduletypes.ModuleName},
-		// {Account: schedmoduletypes.ModuleName},
-		// {Account: oracletypes.ModuleName, Permissions: []string{}},
-		// {Account: wardenmoduletypes.ModuleName, Permissions: []string{}},
+
 		{Account: evmtypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},         // Allows EVM module to mint/burn
 		{Account: feemarkettypes.ModuleName, Permissions: nil},                                            // Fee market doesn't need permissions
 		{Account: erc20types.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},       // Allows erc20 module to mint/burn for token pairs
@@ -373,28 +350,7 @@ func moduleConfig() depinject.Config {
 					Name:   circuittypes.ModuleName,
 					Config: appconfig.WrapAny(&circuitmodulev1.Module{}),
 				},
-				// {
-				// 	Name:   wardenmoduletypes.ModuleName,
-				// 	Config: appconfig.WrapAny(&wardenmodulev1.Module{}),
-				// },
-				// {
-				// 	Name:   actmoduletypes.ModuleName,
-				// 	Config: appconfig.WrapAny(&actmodulev1.Module{}),
-				// },
-				// {
-				// 	Name:   asyncmoduletypes.ModuleName,
-				// 	Config: appconfig.WrapAny(&asyncmodulev1.Module{}),
-				// },
-				// {
-				// 	Name:   schedmoduletypes.ModuleName,
-				// 	Config: appconfig.WrapAny(&schedmodulev1.Module{}),
-				// },
-				// {
-				// 	Name: marketmaptypes.ModuleName,
-				// 	Config: appconfig.WrapAny(&marketmapmodulev1.Module{
-				// 		Authority: authtypes.NewModuleAddress(govtypes.ModuleName).String(),
-				// 	}),
-				// },
+
 				{
 					Name:   epochstypes.ModuleName,
 					Config: appconfig.WrapAny(&epochsmodulev1.Module{}),
