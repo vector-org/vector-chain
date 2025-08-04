@@ -205,7 +205,7 @@ func New(
 	loadLatest bool,
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
-) *App {
+) (*App, error) {
 	var (
 		app        = &App{}
 		appBuilder *runtime.AppBuilder
@@ -317,7 +317,7 @@ func New(
 		panic(err)
 	}
 
-	return app
+	return app, nil
 }
 
 // GetSubspace returns a param subspace for a given module name.
