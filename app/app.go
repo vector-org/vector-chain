@@ -218,13 +218,9 @@ func New(
 			depinject.Supply(
 				appOpts, // supply app options
 				app.GetIBCKeeper,
-				// Supply Wasm keeper, similar to what we do for IBC keeper, since it doesn't support App Wiring yet.
-				// app.GetWasmKeeper,
 				app.GetEvmKeeper,
 				app.GetFeemarketKeeper,
 				logger, // supply logger
-				// Supply custom signers for EVM messages
-				// []txsigning.CustomGetSigner{evmtypes.MsgEthereumTxCustomGetSigner},
 				// here alternative options can be supplied to the DI container.
 				// those options can be used f.e to override the default behavior of some modules.
 				// for instance supplying a custom address codec for not using bech32 addresses.
@@ -234,14 +230,12 @@ func New(
 		)
 	)
 
-	// var appModules map[string]appmodule.AppModule
 	if err := depinject.Inject(appConfig,
 		&appBuilder,
 		&app.appCodec,
 		&app.legacyAmino,
 		&app.txConfig,
 		&app.interfaceRegistry,
-		// &app.prophet,
 		&app.AuthKeeper,
 		&app.BankKeeper,
 		&app.StakingKeeper,
@@ -258,12 +252,6 @@ func New(
 		&app.ConsensusParamsKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.VectorKeeper,
-		// &app.ActKeeper,
-		// &app.AsyncKeeper,
-		// &app.SchedKeeper,
-		// &app.MarketMapKeeper,
-		// &app.OracleKeeper,
-		// &app.EpochsKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)
@@ -287,112 +275,19 @@ func New(
 		panic(err)
 	}
 
-	// EVM INTEGRATION: Add after DI build
-	// Add KV & transient stores
-
-	// evmKeys := storetypes.NewKVStoreKeys(
-	// 	evmtypes.StoreKey, feemarkettypes.StoreKey,
-	// 	erc20types.StoreKey, precisebanktypes.StoreKey,
-	// )
-	// evmTKeys := storetypes.NewTransientStoreKeys(
-	// 	evmtypes.TransientKey, feemarkettypes.TransientKey,
-	// )
-	// app.MountKVStores(evmKeys)
-	// app.MountTransientStores(evmTKeys)
-
-	// // Fee-market keeper first
-	// app.FeeMarketKeeper = feemarketkeeper.NewKeeper(
-	// 	app.appCodec, authtypes.NewModuleAddress(govtypes.ModuleName),
-	// 	evmKeys[feemarkettypes.StoreKey], evmTKeys[feemarkettypes.TransientKey],
-	// )
-
-	// // PreciseBank keeper
-	// app.PreciseBankKeeper = precisebankkeeper.NewKeeper(
-	// 	app.appCodec, evmKeys[precisebanktypes.StoreKey],
-	// 	app.BankKeeper, app.AuthKeeper,
-	// )
-
-	// // EVM keeper (must precede ERC-20) - using correct signature
-	// tracer := cast.ToString(appOpts.Get(srvflags.EVMTracer))
-
-	// app.EVMKeeper = vmkeeper.NewKeeper(
-	// 	app.appCodec, evmKeys[evmtypes.StoreKey], evmTKeys[evmtypes.TransientKey],
-	// 	evmKeys,
-	// 	authtypes.NewModuleAddress(govtypes.ModuleName),
-	// 	app.AuthKeeper, app.PreciseBankKeeper,
-	// 	app.StakingKeeper, app.FeeMarketKeeper,
-	// 	app.ConsensusParamsKeeper,
-	// 	&app.Erc20Keeper, tracer,
-	// )
-
-	// // ERC-20 keeper
-	// app.Erc20Keeper = erc20keeper.NewKeeper(
-	// 	evmKeys[erc20types.StoreKey], app.appCodec,
-	// 	authtypes.NewModuleAddress(govtypes.ModuleName),
-	// 	app.AuthKeeper, app.PreciseBankKeeper,
-	// 	app.EVMKeeper, app.StakingKeeper,
-	// 	&app.TransferKeeper,
-	// )
-
 	// register legacy modules
 	if err := app.registerIBCModules(appOpts); err != nil {
 		panic(err)
 	}
-
-	// // Add EVM modules to module manager
-	// evmModules := map[string]appmodule.AppModule{
-	// 	evmtypes.ModuleName:         vm.NewAppModule(app.EVMKeeper, app.AuthKeeper, app.interfaceRegistry.SigningContext().AddressCodec()),
-	// 	feemarkettypes.ModuleName:   feemarket.NewAppModule(app.FeeMarketKeeper),
-	// 	erc20types.ModuleName:       erc20.NewAppModule(app.Erc20Keeper, app.AuthKeeper),
-	// 	precisebanktypes.ModuleName: precisebank.NewAppModule(app.PreciseBankKeeper, app.BankKeeper, app.AuthKeeper),
-	// }
-
-	// for name, module := range evmModules {
-	// 	app.ModuleManager.Modules[name] = module
-	// }
-
-	// // Update module ordering for EVM
-	// app.ModuleManager.SetOrderBeginBlockers(
-	// 	// EVM modules first
-	// 	feemarkettypes.ModuleName,
-	// 	evmtypes.ModuleName,
-	// 	erc20types.ModuleName,
-	// 	precisebanktypes.ModuleName,
-	// 	// existing modules follow...
-	// )
-
-	// app.ModuleManager.SetOrderEndBlockers(
-	// 	evmtypes.ModuleName,
-	// 	feemarkettypes.ModuleName,
-	// 	erc20types.ModuleName,
-	// 	precisebanktypes.ModuleName,
-	// 	// existing modules follow...
-	// )
-
-	// // Set up ante handler using correct types from example
-	// options := chainante.HandlerOptions{
-	// 	Cdc:                    app.appCodec,
-	// 	AccountKeeper:          app.AuthKeeper,
-	// 	BankKeeper:             app.BankKeeper,
-	// 	ExtensionOptionChecker: cosmosevmtypes.HasDynamicFeeExtensionOption,
-	// 	EvmKeeper:              app.EVMKeeper,
-	// 	FeeMarketKeeper:        app.FeeMarketKeeper,
-	// 	SignModeHandler:        app.TxConfig().SignModeHandler(),
-	// 	SigGasConsumer:         evmante.SigVerificationGasConsumer,
-	// 	MaxTxGasWanted:         cast.ToUint64(appOpts.Get(srvflags.EVMMaxTxGasWanted)),
-	// 	TxFeeChecker:           cosmosevmante.NewDynamicFeeChecker(app.FeeMarketKeeper),
-	// }
-	// app.SetAnteHandler(chainante.NewAnteHandler(options))
 
 	// Setup IBC-v2 routing with ERC20 middleware
 	var transferStack porttypes.IBCModule
 	transferStack = transfer.NewIBCModule(app.TransferKeeper)
 	transferStack = erc20.NewIBCMiddleware(app.Erc20Keeper, transferStack)
 
-	// Update IBC router
+	// // Update IBC router
 	// ibcRouter := porttypes.NewRouter().
 	// 	AddRoute(ibctransfertypes.ModuleName, transferStack)
-
 	// app.IBCKeeper.SetRouter(ibcRouter)
 
 	/****  Module Options ****/
@@ -499,11 +394,6 @@ func (app *App) GetIBCKeeper() *ibckeeper.Keeper {
 	return app.IBCKeeper
 }
 
-// // GetWasmKeeper returns the Wasm keeper.
-// func (app *App) GetWasmKeeper() wasmkeeper.Keeper {
-// 	return app.WasmKeeper
-// }
-
 // GetEvmKeeper returns the Evm keeper.
 func (app *App) GetEvmKeeper(_placeHolder int16) *evmkeeper.Keeper {
 	return app.EVMKeeper
@@ -591,8 +481,6 @@ func (app *App) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64) {
 		AccountKeeper: app.AuthKeeper,
 		BankKeeper:    app.BankKeeper,
 		IBCKeeper:     app.IBCKeeper,
-		// WasmConfig:    &wasmConfig,
-		// WasmKeeper:            &app.WasmKeeper,
 		// TXCounterStoreService: runtime.NewKVStoreService(txCounterStoreKey),
 		CircuitKeeper:   &app.CircuitBreakerKeeper,
 		EVMKeeper:       app.EVMKeeper,
