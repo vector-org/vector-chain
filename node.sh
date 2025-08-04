@@ -177,11 +177,15 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 		sed -i '' 's/prometheus-retention-time = 0/prometheus-retention-time  = 1000000000000/g' "$APP_TOML"
 		sed -i '' 's/enabled = false/enabled = true/g' "$APP_TOML"
 		sed -i '' 's/enable = false/enable = true/g' "$APP_TOML"
+		# Enable EVM transaction indexer
+		sed -i '' 's/enable-indexer = false/enable-indexer = true/g' "$APP_TOML"
 	else
 		sed -i 's/prometheus = false/prometheus = true/' "$CONFIG"
 		sed -i 's/prometheus-retention-time  = "0"/prometheus-retention-time  = "1000000000000"/g' "$APP_TOML"
 		sed -i 's/enabled = false/enabled = true/g' "$APP_TOML"
 		sed -i 's/enable = false/enable = true/g' "$APP_TOML"
+		# Enable EVM transaction indexer
+		sed -i 's/enable-indexer = false/enable-indexer = true/g' "$APP_TOML"
 	fi
 
 	# Change proposal periods to pass within a reasonable time for local testing
