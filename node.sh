@@ -179,6 +179,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 		sed -i '' 's/enable = false/enable = true/g' "$APP_TOML"
 		# Enable EVM transaction indexer
 		sed -i '' 's/enable-indexer = false/enable-indexer = true/g' "$APP_TOML"
+		sed -i '' 's/evm-chain-id = 262144/evm-chain-id = 13388/g' "$APP_TOML"
 	else
 		sed -i 's/prometheus = false/prometheus = true/' "$CONFIG"
 		sed -i 's/prometheus-retention-time  = "0"/prometheus-retention-time  = "1000000000000"/g' "$APP_TOML"
@@ -186,6 +187,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 		sed -i 's/enable = false/enable = true/g' "$APP_TOML"
 		# Enable EVM transaction indexer
 		sed -i 's/enable-indexer = false/enable-indexer = true/g' "$APP_TOML"
+		sed -i 's/evm-chain-id = 262144/evm-chain-id = 13388/g' "$APP_TOML"
 	fi
 
 	# Change proposal periods to pass within a reasonable time for local testing
@@ -197,16 +199,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	sed -i.bak 's/pruning = "default"/pruning = "custom"/g' "$APP_TOML"
 	sed -i.bak 's/pruning-keep-recent = "0"/pruning-keep-recent = "2"/g' "$APP_TOML"
 	sed -i.bak 's/pruning-interval = "0"/pruning-interval = "10"/g' "$APP_TOML"
-
-	# Add evm-chain-id to the [evm] section
-	if [[ "$OSTYPE" == "darwin"* ]]; then
-		sed -i '' '/\[evm\]/a\
-# EVM Chain ID for the network\
-evm-chain-id = "13388"' "$APP_TOML"
-	else
-		sed -i '/\[evm\]/a # EVM Chain ID for the network\nevm-chain-id = "13388"' "$APP_TOML"
-	fi
-
+	
 	# Allocate genesis accounts (cosmos formatted addresses)
 	vectord genesis add-genesis-account "$VAL_KEY" 100000000000000000000000000atest --keyring-backend "$KEYRING" --home "$HOMEDIR"
 	vectord genesis add-genesis-account "$USER1_KEY" 1000000000000000000000atest --keyring-backend "$KEYRING" --home "$HOMEDIR"

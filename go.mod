@@ -7,7 +7,7 @@ replace (
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 
 	// Use specific commit for cosmos/evm
-	github.com/cosmos/evm => github.com/elix1er/evm v0.0.0-20250731063539-086a5c7e4a52
+	// github.com/cosmos/evm => github.com/elix1er/evm v0.0.0-20250731063539-086a5c7e4a52
 
 	// Use Cosmos-patched Geth to avoid cgo/crypto issues
 	github.com/ethereum/go-ethereum => github.com/cosmos/go-ethereum v1.15.11-cosmos-0
@@ -44,7 +44,7 @@ require (
 	github.com/cosmos/cosmos-db v1.1.3
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
 	github.com/cosmos/cosmos-sdk v0.53.4
-	github.com/cosmos/evm v0.3.0
+	github.com/cosmos/evm v0.3.1
 	// github.com/cosmos/evm/evmd v0.0.0-20250725153303-2934281442b2
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/cosmos/gogoproto v1.7.0
@@ -64,7 +64,7 @@ require (
 	golang.org/x/text v0.27.0 // indirect
 	golang.org/x/tools v0.34.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250603155806-513f23925822
-	google.golang.org/grpc v1.74.0
+	google.golang.org/grpc v1.74.2
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.5.1 // indirect
 	google.golang.org/protobuf v1.36.6
 )
