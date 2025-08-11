@@ -83,8 +83,8 @@ import (
 const (
 	// Name is the name of the application.
 	Name = "vector"
-	// AccountAddressPrefix is the prefix for accounts addresses.
-	AccountAddressPrefix = "cosmos"
+	// AccountAddressPrefix is the prefix for account addresses.
+	AccountAddressPrefix = "vector"
 	// ChainCoinType is the coin type of the chain.
 	ChainCoinType = 60 // Changed from 118 to 60 for EVM compatibility (Ethereum standard)
 )
