@@ -268,7 +268,8 @@ func (app *App) registerIBCModules(appOpts servertypes.AppOptions) error {
 		app.SlashingKeeper,
 		app.EvidenceKeeper,
 		app.AppCodec(),
-		// app.VectorKeeper,
+		app.AuthKeeper.AddressCodec(),
+		app.StakingKeeper.ValidatorAddressCodec(),
 	)
 
 	app.EVMKeeper.WithStaticPrecompiles(
