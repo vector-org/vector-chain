@@ -18,9 +18,9 @@ import (
 var sealed = false
 
 var coinInfo = evmtypes.EvmCoinInfo{
-	Denom:         "atest",
-	ExtendedDenom: "atest",
-	DisplayDenom:  "TEST",
+	Denom:         "uvctr",
+	ExtendedDenom: "uvctr",
+	DisplayDenom:  "VCTR",
 	Decimals:      evmtypes.EighteenDecimals, // Changed from SixDecimals to EighteenDecimals for EVM compatibility
 }
 

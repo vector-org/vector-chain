@@ -23,8 +23,8 @@ import (
 	evmkeeper "github.com/cosmos/evm/x/vm/keeper"
 	channelkeeper "github.com/cosmos/ibc-go/v10/modules/core/04-channel/keeper"
 
-	evidencekeeper "cosmossdk.io/x/evidence/keeper"
 	"cosmossdk.io/core/address"
+	evidencekeeper "cosmossdk.io/x/evidence/keeper"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	distributionkeeper "github.com/cosmos/cosmos-sdk/x/distribution/keeper"

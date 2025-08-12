@@ -34,7 +34,7 @@ import (
 )
 
 const (
-	SimAppChainID = "warden_13388-simapp"
+	SimAppChainID = "vector_13388-simapp"
 )
 
 var FlagEnableStreamingValue bool
