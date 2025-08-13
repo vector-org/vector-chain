@@ -148,6 +148,27 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	# Set gas limit in genesis
 	jq '.consensus.params.block.max_gas="10000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
+	# Configure feemarket parameters
+	jq '.app_state["feemarket"]["params"]["base_fee"]="0.010000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["feemarket"]["params"]["min_gas_price"]="0.010000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+
+	# Configure governance parameters
+	jq '.app_state["gov"]["params"]["min_deposit"][0]["amount"]="1000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["gov"]["params"]["max_deposit_period"]="172800s"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["gov"]["params"]["voting_period"]="420s"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+
+	# Configure staking parameters
+	jq '.app_state["staking"]["params"]["unbonding_time"]="300s"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["staking"]["params"]["min_commission_rate"]="0.050000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+
+	# Configure slashing parameters
+	jq '.app_state["slashing"]["params"]["signed_blocks_window"]="28800"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+
+	# Configure interchain accounts parameters
+	jq '.app_state["interchainaccounts"]["controller_genesis_state"]["params"]["controller_enabled"]=false' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["interchainaccounts"]["host_genesis_state"]["params"]["host_enabled"]=false' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["interchainaccounts"]["host_genesis_state"]["params"]["allow_messages"]=[]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+
 	if [[ $1 == "pending" ]]; then
 		if [[ "$OSTYPE" == "darwin"* ]]; then
 			sed -i '' 's/timeout_propose = "3s"/timeout_propose = "30s"/g' "$CONFIG"
@@ -181,6 +202,18 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 		# Enable EVM transaction indexer
 		sed -i '' 's/enable-indexer = false/enable-indexer = true/g' "$APP_TOML"
 		sed -i '' 's/evm-chain-id = 262144/evm-chain-id = 13388/g' "$APP_TOML"
+		# Configure networking and API settings
+		sed -i '' 's/laddr = "tcp:\/\/127.0.0.1:26657"/laddr = "tcp:\/\/0.0.0.0:26657"/g' "$CONFIG"
+		sed -i '' 's/cors_allowed_origins = \[\]/cors_allowed_origins = ["\*"]/g' "$CONFIG"
+		sed -i '' 's/address = "tcp:\/\/localhost:1317"/address = "tcp:\/\/0.0.0.0:1317"/g' "$APP_TOML"
+		sed -i '' 's/enabled-unsafe-cors = false/enabled-unsafe-cors = true/g' "$APP_TOML"
+		# Configure gRPC settings
+		sed -i '' '/^\[grpc\]/,/^\[/ s/enable = true/enable = false/' "$APP_TOML"
+		sed -i '' 's/address = "127.0.0.1:8545"/address = "0.0.0.0:8545"/g' "$APP_TOML"
+		sed -i '' 's/ws-address = "127.0.0.1:8546"/ws-address = "0.0.0.0:8546"/g' "$APP_TOML"
+		sed -i '' 's/metrics-address = "127.0.0.1:6065"/metrics-address = "0.0.0.0:6065"/g' "$APP_TOML"
+		sed -i '' 's/api = "eth,net,web3"/api = "eth,txpool,personal,net,debug,web3"/g' "$APP_TOML"
+		sed -i '' 's/query-gas-limit = "0"/query-gas-limit = "10000000"/g' "$APP_TOML"
 	else
 		sed -i 's/prometheus = false/prometheus = true/' "$CONFIG"
 		sed -i 's/prometheus-retention-time  = "0"/prometheus-retention-time  = "1000000000000"/g' "$APP_TOML"
@@ -191,11 +224,23 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 		# Enable EVM transaction indexer
 		sed -i 's/enable-indexer = false/enable-indexer = true/g' "$APP_TOML"
 		sed -i 's/evm-chain-id = 262144/evm-chain-id = 13388/g' "$APP_TOML"
+		# Configure networking and API settings
+		sed -i 's/laddr = "tcp:\/\/127.0.0.1:26657"/laddr = "tcp:\/\/0.0.0.0:26657"/g' "$CONFIG"
+		sed -i 's/cors_allowed_origins = \[\]/cors_allowed_origins = ["\*"]/g' "$CONFIG"
+		sed -i 's/address = "tcp:\/\/localhost:1317"/address = "tcp:\/\/0.0.0.0:1317"/g' "$APP_TOML"
+		sed -i 's/enabled-unsafe-cors = false/enabled-unsafe-cors = true/g' "$APP_TOML"
+		# Configure gRPC settings
+		sed -i '/^\[grpc\]/,/^\[/ s/enable = true/enable = false/' "$APP_TOML"
+		sed -i 's/address = "127.0.0.1:8545"/address = "0.0.0.0:8545"/g' "$APP_TOML"
+		sed -i 's/ws-address = "127.0.0.1:8546"/ws-address = "0.0.0.0:8546"/g' "$APP_TOML"
+		sed -i 's/metrics-address = "127.0.0.1:6065"/metrics-address = "0.0.0.0:6065"/g' "$APP_TOML"
+		sed -i 's/api = "eth,net,web3"/api = "eth,txpool,personal,net,debug,web3"/g' "$APP_TOML"
+		sed -i 's/query-gas-limit = "0"/query-gas-limit = "10000000"/g' "$APP_TOML"
 	fi
 
-	# Change proposal periods to pass within a reasonable time for local testing
-	sed -i.bak 's/"max_deposit_period": "172800s"/"max_deposit_period": "30s"/g' "$GENESIS"
-	sed -i.bak 's/"voting_period": "172800s"/"voting_period": "30s"/g' "$GENESIS"
+	# Change proposal periods to match downloaded config values
+	sed -i.bak 's/"max_deposit_period": "30s"/"max_deposit_period": "172800s"/g' "$GENESIS"
+	sed -i.bak 's/"voting_period": "30s"/"voting_period": "420s"/g' "$GENESIS"
 	sed -i.bak 's/"expedited_voting_period": "86400s"/"expedited_voting_period": "15s"/g' "$GENESIS"
 
 	# set custom pruning settings
