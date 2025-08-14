@@ -266,10 +266,11 @@ func (app *App) registerIBCModules(appOpts servertypes.AppOptions) error {
 		app.EVMKeeper,
 		*app.GovKeeper,
 		app.SlashingKeeper,
-		app.EvidenceKeeper,
 		app.AppCodec(),
-		app.AuthKeeper.AddressCodec(),
-		app.StakingKeeper.ValidatorAddressCodec(),
+		// Provide codecs via options to match precompiles constructor
+		// WithAddressCodec(app.AuthKeeper.AddressCodec()),
+		// WithValidatorAddrCodec(app.StakingKeeper.ValidatorAddressCodec()),
+		// WithConsensusAddrCodec(app.StakingKeeper.ConsensusAddressCodec()),
 	)
 
 	app.EVMKeeper.WithStaticPrecompiles(
