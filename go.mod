@@ -7,7 +7,7 @@ replace (
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 
 	// Use specific commit for cosmos/evm 99abc7f3a47af1289ddd90c279e49f885ee06278
-	github.com/cosmos/evm => github.com/cosmos/evm v0.0.0-20250813201544-99abc7f3a47a
+	// github.com/cosmos/evm => github.com/cosmos/evm v0.0.0-20250813201544-99abc7f3a47a
 
 	// Use Cosmos-patched Geth to avoid cgo/crypto issues
 	github.com/ethereum/go-ethereum => github.com/cosmos/go-ethereum v1.15.11-cosmos-0
@@ -30,7 +30,7 @@ require (
 	cosmossdk.io/core v0.11.3
 	cosmossdk.io/depinject v1.2.1
 	cosmossdk.io/errors v1.0.2
-	cosmossdk.io/log v1.6.0
+	cosmossdk.io/log v1.6.1
 	cosmossdk.io/math v1.5.3
 	cosmossdk.io/store v1.1.2
 	cosmossdk.io/tools/confix v0.1.2
@@ -44,7 +44,7 @@ require (
 	github.com/cosmos/cosmos-db v1.1.3
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
 	github.com/cosmos/cosmos-sdk v0.53.4
-	github.com/cosmos/evm v0.3.1
+	github.com/cosmos/evm v0.4.0
 
 	// github.com/cosmos/evm v0.0.0-20250811151645-8fb90ba23b46
 	// github.com/cosmos/evm/evmd v0.0.0-20250725153303-2934281442b2
@@ -148,8 +148,8 @@ require (
 	github.com/bufbuild/protoplugin v0.0.0-20250218205857-750e09ce93e1 // indirect
 	github.com/butuzov/ireturn v0.3.1 // indirect
 	github.com/butuzov/mirror v1.3.0 // indirect
-	github.com/bytedance/sonic v1.13.2 // indirect
-	github.com/bytedance/sonic/loader v0.2.4 // indirect
+	github.com/bytedance/sonic v1.14.0 // indirect
+	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/catenacyber/perfsprint v0.8.2 // indirect
 	github.com/ccojocar/zxcvbn-go v1.0.2 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -461,7 +461,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
-	golang.org/x/arch v0.15.0 // indirect
+	golang.org/x/arch v0.17.0 // indirect
 	golang.org/x/crypto v0.41.0 // indirect
 	golang.org/x/exp v0.0.0-20250606033433-dcc06ee1d476 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20250210185358-939b2ce775ac // indirect
