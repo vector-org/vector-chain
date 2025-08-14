@@ -44,7 +44,7 @@ require (
 	github.com/cosmos/cosmos-db v1.1.3
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
 	github.com/cosmos/cosmos-sdk v0.53.4
-	github.com/cosmos/evm v0.4.0
+	github.com/cosmos/evm v0.4.1
 
 	// github.com/cosmos/evm v0.0.0-20250811151645-8fb90ba23b46
 	// github.com/cosmos/evm/evmd v0.0.0-20250725153303-2934281442b2
