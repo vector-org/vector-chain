@@ -149,9 +149,10 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	jq '.consensus.params.block.max_gas="10000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	# Configure feemarket parameters
-	jq '.app_state["feemarket"]["params"]["base_fee"]="0.010000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-	jq '.app_state["feemarket"]["params"]["min_gas_price"]="0.010000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-
+	jq '.app_state["feemarket"]["params"]["base_fee"]="1000000000.000000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["feemarket"]["params"]["min_gas_price"]="100000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	# "base_fee": "1000000000.000000000000000000",
+	# "min_gas_price": "3750000000000",
 	# Configure governance parameters
 	jq '.app_state["gov"]["params"]["min_deposit"][0]["amount"]="1000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 	jq '.app_state["gov"]["params"]["max_deposit_period"]="172800s"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
@@ -239,8 +240,8 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	fi
 
 	# Change proposal periods to match downloaded config values
-	sed -i.bak 's/"max_deposit_period": "30s"/"max_deposit_period": "172800s"/g' "$GENESIS"
-	sed -i.bak 's/"voting_period": "30s"/"voting_period": "420s"/g' "$GENESIS"
+	sed -i.bak 's/"max_deposit_period": "172800s"/"max_deposit_period": "172800s"/g' "$GENESIS"
+	sed -i.bak 's/"voting_period": "172800s"/"voting_period": "420s"/g' "$GENESIS"
 	sed -i.bak 's/"expedited_voting_period": "86400s"/"expedited_voting_period": "15s"/g' "$GENESIS"
 
 	# set custom pruning settings

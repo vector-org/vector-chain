@@ -46,14 +46,19 @@ func initRootCmd(
 	txConfig client.TxConfig,
 	basicManager module.BasicManager,
 ) {
+	// Wrapper for commands that expect an SDK app creator
+	sdkAppCreatorWrapper := func(l log.Logger, d dbm.DB, w io.Writer, ao servertypes.AppOptions) servertypes.Application {
+		return newApp(l, d, w, ao).(*app.App)
+	}
+
 	rootCmd.AddCommand(
 		genutilcli.InitCmd(basicManager, app.DefaultNodeHome),
 		// NewInPlaceTestnetCmd(),
 		// NewTestnetMultiNodeCmd(basicManager, banktypes.GenesisBalancesIterator{}),
 		debug.Cmd(),
 		confixcmd.ConfigCommand(),
-		pruning.Cmd(newApp, app.DefaultNodeHome),
-		snapshot.Cmd(newApp),
+		pruning.Cmd(sdkAppCreatorWrapper, app.DefaultNodeHome),
+		snapshot.Cmd(sdkAppCreatorWrapper),
 	)
 
 	evmserver.AddCommands(
@@ -138,7 +143,7 @@ func newApp(
 	db dbm.DB,
 	traceStore io.Writer,
 	appOpts servertypes.AppOptions,
-) servertypes.Application {
+) evmserver.Application {
 	baseappOptions := server.DefaultBaseappOptions(appOpts)
 
 	app, err := app.New(

@@ -61,6 +61,8 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v10/modules/core/keeper"
 	"github.com/spf13/cast"
 
+	common "github.com/ethereum/go-ethereum/common"
+
 	// EVM imports (corrected paths for v0.3.0)
 	"github.com/cosmos/evm/x/erc20"
 	erc20keeper "github.com/cosmos/evm/x/erc20/keeper"
@@ -74,6 +76,7 @@ import (
 	ibctransferkeeper "github.com/cosmos/evm/x/ibc/transfer/keeper"
 
 	// EVM server flags and ante (corrected paths)
+	evmserver "github.com/cosmos/evm/server"
 	srvflags "github.com/cosmos/evm/server/flags"
 
 	"vector/docs"
@@ -105,6 +108,7 @@ var (
 var (
 	_ runtime.AppI            = (*App)(nil)
 	_ servertypes.Application = (*App)(nil)
+	_ evmserver.Application   = (*App)(nil)
 )
 
 // App extends an ABCI application, but with most of its parameters exported.
@@ -112,8 +116,10 @@ var (
 // capabilities aren't needed for testing.
 type App struct {
 	*runtime.App
-	legacyAmino       *codec.LegacyAmino
-	appCodec          codec.Codec
+	legacyAmino *codec.LegacyAmino
+	appCodec    codec.Codec
+	clientCtx   client.Context
+
 	txConfig          client.TxConfig
 	interfaceRegistry codectypes.InterfaceRegistry
 
@@ -149,6 +155,9 @@ type App struct {
 
 	VectorKeeper vectormodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
+
+	// EVM pending transaction listeners
+	pendingTxListeners []evmante.PendingTxListener
 
 	// simulation manager
 	sm *module.SimulationManager
@@ -474,6 +483,10 @@ func BlockedAddresses() map[string]bool {
 	return blockedAddrs
 }
 
+func (app *App) SetClientCtx(clientCtx client.Context) {
+	app.clientCtx = clientCtx
+}
+
 // // DefaultGenesis returns a default genesis from the registered AppModuleBasic's.
 // func (a *App) DefaultGenesis() map[string]json.RawMessage {
 // 	genesis := a.App.DefaultGenesis()
@@ -489,8 +502,12 @@ func BlockedAddresses() map[string]bool {
 // 	erc20GenState := NewErc20GenesisState()
 // 	genesis[erc20types.ModuleName] = a.appCodec.MustMarshalJSON(erc20GenState)
 
-// 	return genesis
-// }
+//		return genesis
+//	}
+
+func (app *App) RegisterPendingTxListener(listener func(common.Hash)) {
+	app.pendingTxListeners = append(app.pendingTxListeners, listener)
+}
 
 func (app *App) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64) {
 	options := HandlerOptions{
